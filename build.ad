@@ -1,0 +1,61 @@
+#!/bin/sh
+################################################################################
+##
+##	To make build executable:
+##	$ chmod 775 build.ad
+##
+##	Usage:
+##	$ cd path/to/work
+##	$ sh build.ad r
+##	
+################################################################################
+#
+# build index
+#
+as="sources/classes/Index.as"
+swf="publish/index.swf"
+
+#
+# class paths
+#
+sourcespath="sources/classes/ sources/libs/"
+librarypath="sources/swc/"
+
+#
+# previews
+#
+preview0="publish/index.swf"
+preview1="publish/index.html"
+preview2="http://localhost:8000/"
+
+#
+# support
+#
+flexpath="/Users/adrianmiranda/addons/SDKs/flex_sdk_4.6.0"
+swc="$flexpath/frameworks/libs/framework.swc $librarypath"
+mxmlc="$flexpath/bin/mxmlc"
+asdoc="$flexpath/bin/asdoc"
+flashlog='/Users/adrianmiranda/Library/Preferences/Macromedia/Flash Player/Logs/flashlog.txt'
+options="-static-link-runtime-shared-libraries=true -use-network=false -incremental=false -keep=false -debug=true -target-player=10.1"
+
+#
+# run mxmlc
+#
+echo "### BUILDING $swf"
+$mxmlc $as -o $swf -source-path $sourcespath -library-path $swc $options
+echo "### FINISH!"
+
+#
+# launch previews
+#
+if [ "$1" = "r" ]; then
+	# tail -f "$flashlog"
+	open $preview0
+elif [ "$1" = "rl" ]; then
+	# tail -f "$flashlog"
+	open $preview1
+elif [ "$1" = "rlh" ]; then
+	cd "public"
+	open $preview2
+	python -m SimpleHTTPServer
+fi

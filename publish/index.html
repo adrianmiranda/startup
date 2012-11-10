@@ -1,0 +1,93 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="pt-BR"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang="pt-BR"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9" lang="pt-BR"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="pt-br">
+<!--<![endif]-->
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+		
+		<title></title>
+		
+		<meta property="og:description" content=""/>
+		<meta property="og:title" content=""/>
+		<meta property="og:image" content=""/>
+		<meta property="og:image:type" content="image/jpeg"/>
+		<meta property="og:image:width" content="400"/>
+		<meta property="og:image:height" content="300"/>
+		<meta property="og:url" content=""/>
+		<meta property="og:site_name" content=""/>
+		<meta property="og:locale" content="pt_BR"/>
+		<meta property="og:type" content="website"/>
+		
+		<meta name="twitter:description" content=""/>
+		<meta name="twitter:title" content=""/>
+		<meta name="twitter:image" content=""/>
+		<meta name="twitter:card" content=""/>
+		<meta name="twitter:creator" content=""/>
+		
+		<meta name="description" content=""/>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+		<meta name="keywords" content=""/>
+		<meta name="robots" content="noindex"/>
+		<meta name="googlebot-news" content="noindex" />
+		<meta name="googlebot" content="noindex" />
+		<meta name="author" content="Adrian C. Miranda"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+
+		<script src='inc/js/swfaddress.js'></script>
+		<script src='inc/js/swfobject.js'></script>
+	</head>
+	<!--
+		
+		Adrian C. Miranda <ad@adrianmiranda.com.br>
+		
+	-->
+	<body>
+		<div class="wrapper">
+			<div id='flash'><div>
+		</div>
+		<script type="text/javascript">
+			var flashvars = {
+				  fvBaseContent: ""; // path assets as xml, swf
+				, fvBaseService: ""; // path services
+			};
+			var settings = {
+				  express: flashvars.fvBaseContent+"inc/_/expressInstall.swf"
+				, swf: flashvars.fvBaseContent+"index.swf"
+				, version: "10.0.000"
+				, div: "flash"
+				, width: "550"
+				, height: "400"
+			};
+			var parameters = {
+				  allowscriptaccess: "always"
+				, allowFullScreen: "true"
+				, allownetworking: "all"
+				, wmode: "transparent"
+			};
+			var attributes = {
+				  id: settings.div
+				, name: settings.div
+			};
+			swfobject.createCSS("html", "width:"+settings.width+";height:"+settings.height+";margin:0;padding:0;overflow:hidden;");
+			swfobject.createCSS("body", "width:"+settings.width+";height:"+settings.height+";margin:0;padding:0;overflow:hidden;");
+			swfobject.createCSS("#"+ settings.div, "width:"+ settings.width +";height:"+ settings.height +";margin:0;");
+			swfobject.embedSWF
+			(
+				  settings.swf
+				, settings.div
+				, settings.width
+				, settings.height
+				, settings.version
+				, settings.express
+				, flashvars
+				, parameters
+				, attributes
+			);
+		</script>
+	</body>
+</html>
