@@ -6,5 +6,10 @@ package com.ad.core {
 		public function Navigation(key:String = null) {
 			super(key);
 		}
+
+		public static function getInstance(key:String = null):Navigation {
+			if (!hasInstance(key)) instances[key] = new Navigation(key);
+			return instances[key] as Navigation;
+		}
 	}
 }

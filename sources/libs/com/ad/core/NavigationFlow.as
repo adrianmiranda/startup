@@ -7,16 +7,21 @@ package com.ad.core {
 	import flash.events.Event;
 	import flash.utils.getDefinitionByName;
 	
-	public final class FlowManager {
+	public class NavigationFlow extends NavigationData {
 		private var _isInterrupted:Boolean;
 		private var _transitionState:int;
 		private var _section:ISection;
 		
-		public function FlowManager() {
-			
+		public function NavigationFlow(key:String = null) {
+			super(key);
 		}
 		
-		public function createStackTransition():void {
+		public static function getInstance(key:String = null):NavigationFlow {
+			if (!hasInstance(key)) instances[key] = new NavigationFlow(key);
+			return instances[key] as NavigationFlow;
+		}
+		
+		override protected function createStackTransition():void {
 			this.makeSection(DeepLink.item.source);
 		}
 		

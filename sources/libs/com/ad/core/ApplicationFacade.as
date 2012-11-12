@@ -1,19 +1,18 @@
 package com.ad.core {
 	import com.ad.common.getLayer;
-	import com.ad.core.Deeplink;
 	import com.ad.data.Layers;
 	import com.ad.data.File;
 	import com.ad.data.Language;
 	import com.ad.data.View;
 	import com.ad.errors.ADError;
-	import com.ad.events.DeeplinkEvent;
+	import com.ad.events.ApplicationEvent;
 	import com.ad.events.TransitionEvent;
 	import com.ad.interfaces.ISection;
 	import com.ad.proxy.nsapplication;
 	import com.ad.utils.Cleaner;
+	import com.greensock.events.LoaderEvent;
 	import com.greensock.TweenLite;
 	import com.greensock.TweenMax;
-	import com.greensock.events.LoaderEvent;
 	
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
@@ -22,6 +21,7 @@ package com.ad.core {
 	use namespace nsapplication;
 	public class ApplicationFacade extends ApplicationLoader {
 		private var _container:DisplayObjectContainer;
+		private var _navigation:Navigation;
 		private var _sectionLayerId:String;
 		private var _isInterrupted:Boolean;
 		private var _transitionState:int;
@@ -40,59 +40,64 @@ package com.ad.core {
 			this.validateContainer(binding);
 			super.startup(this._container = DisplayObjectContainer(binding));
 		}
+
+		override protected function onRequestResult():void {
+			super.onRequestResult();
+			this._navigation = Navigation.getInstance(super.apiKey);
+		}
 		
-		public function run(sectionLayerId:String = null, firstView:String = null):void {
+		public function run(sectionLayerId:String = null):void {
 			this._sectionLayerId = sectionLayerId;
-			Deeplink.registerViews(super.header, firstView);
-			Deeplink.addEventListener(DeeplinkEvent.INIT, this.onInitDeeplink);
-			Deeplink.addEventListener(DeeplinkEvent.CHANGE, this.onChangeDeeplink);
-			Deeplink.addEventListener(DeeplinkEvent.CHANGE_VIEW, this.onChangeView);
-			Deeplink.addEventListener(DeeplinkEvent.CHANGE_LANGUAGE, this.onChangeLanguage);
-			Deeplink.initialize();
+			this._navigation.registerViews(super.header);
+			this._navigation.addEventListener(ApplicationEvent.INIT, this.onInitNavigation);
+			this._navigation.addEventListener(ApplicationEvent.CHANGE, this.onChangeNavigation);
+			this._navigation.addEventListener(ApplicationEvent.CHANGE_VIEW, this.onChangeView);
+			this._navigation.addEventListener(ApplicationEvent.CHANGE_LANGUAGE, this.onChangeLanguage);
+			//this._navigation.initialize();
 		}
 		
 		public function setTitle(value:String):void {
-			Deeplink.setTitle(value);
+			this._navigation.setTitle(value);
 		}
 		
 		public function setLanguage(value:*):void {
-			Deeplink.setLanguage(value);
+			this._navigation.setLanguage(value);
 		}
 		
-		public function goto(value:*):void {
-			Deeplink.setValue(value);
+		public function navigateTo(value:*):void {
+			this._navigation.navigateTo(value);
 		}
 		
 		public function go(delta:int):void {
-			Deeplink.go(delta);
+			this._navigation.go(delta);
 		}
 		
 		public function up():void {
-			Deeplink.up();
+			this._navigation.up();
 		}
 		
 		public function forward():void {
-			Deeplink.forward();
+			this._navigation.forward();
 		}
 		
 		public function back():void {
-			Deeplink.back();
+			this._navigation.back();
 		}
 		
 		public function clearHistory():void {
-			Deeplink.clearHistory();
+			this._navigation.clearHistory();
 		}
 		
 		public function get view():View {
-			return Deeplink.view;
+			return this._navigation.view;
 		}
 		
 		public function get language():Language {
-			return Deeplink.language;
+			return this._navigation.language;
 		}
 		
 		public function get pathNames():Array {
-			return Deeplink.getPathNames();
+			return this._navigation.getPathNames();
 		}
 		
 		private function makeSection(view:View):void {
@@ -155,7 +160,7 @@ package com.ad.core {
 			this._section.die();
 			this._section = null;
 			Cleaner.gc();
-			this.makeSection(Deeplink.view);
+			this.makeSection(this._navigation.view);
 		}
 		
 		private function onInterruptTransition():void {
@@ -171,20 +176,20 @@ package com.ad.core {
 			return this._section;
 		}
 		
-		protected function onInitDeeplink(event:DeeplinkEvent):void {
+		protected function onInitNavigation(event:ApplicationEvent):void {
 			super.dispatchEvent(event.clone());
 		}
 		
-		protected function onChangeDeeplink(event:DeeplinkEvent):void {
+		protected function onChangeNavigation(event:ApplicationEvent):void {
 			super.dispatchEvent(event.clone());
 		}
 		
-		protected function onChangeView(event:DeeplinkEvent):void {
-			this.makeSection(Deeplink.view);
+		protected function onChangeView(event:ApplicationEvent):void {
+			this.makeSection(this._navigation.view);
 			super.dispatchEvent(event.clone());
 		}
 		
-		protected function onChangeLanguage(event:DeeplinkEvent):void {
+		protected function onChangeLanguage(event:ApplicationEvent):void {
 			super.dispatchEvent(event.clone());
 		}
 		
@@ -210,7 +215,7 @@ package com.ad.core {
 		}
 		
 		override public function dispose(flush:Boolean = false):void {
-			Deeplink.dispose(flush);
+			this._navigation.dispose(flush);
 			if (flush) {
 				this._container = null;
 			}

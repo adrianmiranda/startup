@@ -2,6 +2,7 @@ package com.ad.core {
 	import com.ad.data.View;
 	import com.ad.data.Header;
 	import com.ad.data.Language;
+	import com.ad.errors.ADError;
 	
 	public class NavigationData extends NavigationCore {
 		private var _header:Header;
@@ -12,6 +13,11 @@ package com.ad.core {
 
 		public function NavigationData(key:String = null) {
 			super(key);
+		}
+
+		public static function getInstance(key:String = null):NavigationData {
+			if (!hasInstance(key)) instances[key] = new NavigationData(key);
+			return instances[key] as NavigationData;
 		}
 
 		private function validateHeader(header:Header):void {

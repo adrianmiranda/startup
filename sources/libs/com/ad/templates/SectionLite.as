@@ -3,7 +3,7 @@ package com.ad.templates {
 	import com.ad.data.File;
 	import com.ad.data.Language;
 	import com.ad.data.View;
-	import com.ad.events.DeeplinkEvent;
+	import com.ad.events.ApplicationEvent;
 	import com.ad.interfaces.ISection;
 	import com.ad.proxy.nsapplication;
 	
@@ -24,8 +24,8 @@ package com.ad.templates {
 		public function set apiKey(key:String):void {
 			if (!this._application) {
 				this._application = Application.getInstance(key);
-				this._application.addEventListener(DeeplinkEvent.CHANGE_VIEW, this.onChangeView);
-				this._application.addEventListener(DeeplinkEvent.CHANGE_LANGUAGE, this.onChangeLanguage);
+				this._application.addEventListener(ApplicationEvent.CHANGE_VIEW, this.onChangeView);
+				this._application.addEventListener(ApplicationEvent.CHANGE_LANGUAGE, this.onChangeLanguage);
 			}
 		}
 		
@@ -38,17 +38,17 @@ package com.ad.templates {
 		override protected function onRemovedFromStage(event:Event):void {
 			super.onRemovedFromStage(event);
 			if (this._application) {
-				this._application.removeEventListener(DeeplinkEvent.CHANGE_LANGUAGE, this.onChangeLanguage);
-				this._application.removeEventListener(DeeplinkEvent.CHANGE_VIEW, this.onChangeView);
+				this._application.removeEventListener(ApplicationEvent.CHANGE_LANGUAGE, this.onChangeLanguage);
+				this._application.removeEventListener(ApplicationEvent.CHANGE_VIEW, this.onChangeView);
 				this._application = null;
 			}
 		}
 		
-		private function onChangeLanguage(event:DeeplinkEvent):void {
+		private function onChangeLanguage(event:ApplicationEvent):void {
 			this.localize();
 		}
 		
-		private function onChangeView(event:DeeplinkEvent):void {
+		private function onChangeView(event:ApplicationEvent):void {
 			this.change();
 		}
 		

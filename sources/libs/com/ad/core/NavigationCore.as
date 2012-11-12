@@ -1,10 +1,11 @@
 package com.ad.core {
 	import com.ad.events.EventControl;
+	import com.ad.events.ApplicationEvent;
 	import com.ad.utils.BranchUtils;
 	import com.ad.errors.ADError;
 	import com.ad.utils.Browser;
-	import com.asual.swfaddress.SWFAddressEvent;
-	import com.asual.swfaddress.SWFAddress;
+	import com.asual.SWFAddressEvent;
+	import com.asual.SWFAddress;
 	
 	[Event(type='ApplicationEvent', name='ApplicationEvent.EXTERNAL_CHANGE')]
 	[Event(type='ApplicationEvent', name='ApplicationEvent.INTERNAL_CHANGE')]
@@ -120,7 +121,7 @@ package com.ad.core {
 			super.dispatchEvent(new ApplicationEvent(ApplicationEvent.INIT, this.apiKey));
 		}
 
-		public function isHome(value:String):void {
+		public function isHome(value:String):Boolean {
 			return value == '/home/' || value == '/' || value == '';
 		}
 
@@ -143,7 +144,7 @@ package com.ad.core {
 			}
 		}
 
-		public static function back():void {
+		public function back():void {
 			if (this._depth > 0) {
 				this._depth--;
 				if (this._history[this._depth]) {
@@ -152,7 +153,7 @@ package com.ad.core {
 			}
 		}
 		
-		public static function forward():void {
+		public function forward():void {
 			if (this._depth < this._history.length - 1) {;
 				this.navigateTo(this._history[++this._depth]);
 			}
@@ -241,7 +242,7 @@ package com.ad.core {
 				}
 				value = value.substring(0, (value.length - 1));
 			}
-			value = this.apiKey != this.version ? this.apiKey + '/' + value : value;
+			value = this.apiKey != version ? this.apiKey + '/' + value : value;
 			this._history[this._depth] = BranchUtils.arrange(value);
 			SWFAddress.setValue(this._history[this._depth++]);
 		}
