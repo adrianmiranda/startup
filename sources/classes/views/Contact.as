@@ -5,9 +5,9 @@ package views {
 	import flash.text.*;
 	import flash.net.*;
 
-	public final class Home extends Sprite {
+	public final class Contact extends Sprite {
 
-		public function Home() {
+		public function Contact() {
 			super();
 		}
 

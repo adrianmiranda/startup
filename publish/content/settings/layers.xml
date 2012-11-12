@@ -7,7 +7,7 @@
 <layers>
 	<layer id="application" showRegistrationPoint="no">
 		<layer id="background" showRegistrationPoint="no"/>
-		<layer id="section" showRegistrationPoint="no" />
+		<layer id="view" showRegistrationPoint="no" />
 		<layer id="base" showRegistrationPoint="no" />
 		<layer id="popup" showRegistrationPoint="no" />
 	</layer>

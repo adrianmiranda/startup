@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+	<triangulate>
+		<poligono id="1">
+			<point x="0" y="0" />
+			<point x="117" y="0" />
+			<point x="210" y="46" />
+			<point x="13" y="200" />
+			<point x="13" y="200" />
+			<point x="0" y="190" />
+		</poligono>
+		
+		<poligono id="2">
+			<point x="117" y="0" />
+			<point x="210" y="46" />
+			<point x="270" y="0" />
+			<point x="117" y="0" />
+		</poligono>
+		
+		<poligono id="3">
+			<point x="0" y="190" />
+			<point x="13" y="200" />
+			<point x="0" y="210" />
+			<point x="0" y="190" />
+		</poligono>
+		
+		<poligono id="4">
+			<point x="0" y="210" />
+			<point x="13" y="200" />
+			<point x="13" y="200" />
+			<point x="70" y="327" />
+			<point x="0" y="316" />
+			<point x="0" y="210" />
+		</poligono>
+		
+		<poligono id="5">
+			<point x="13" y="200" />
+			<point x="210" y="46" />
+			<point x="390" y="320" />
+			<point x="250" y="350" />
+			<point x="70" y="327" />
+			<point x="13" y="200" />
+		</poligono>
+		
+		<poligono id="6">
+			<point x="270" y="0" />
+			<point x="705" y="0" />
+			<point x="464" y="305" />
+			<point x="390" y="320" />
+			<point x="210" y="46" />
+			<point x="270" y="0" />
+		</poligono>
+		
+		<poligono id="7">
+			<point x="705" y="0" />
+			<point x="716" y="0" />
+			<point x="770" y="240" />
+			<point x="464" y="305" />
+			<point x="705" y="0" />
+		</poligono>
+		
+		<poligono id="8">
+			<point x="716" y="0" />
+			<point x="726" y="0" />
+			<point x="865" y="215" />
+			<point x="770" y="240" />
+			<point x="716" y="0" />
+		</poligono>
+		
+		<poligono id="9">
+			<point x="726" y="0" />
+			<point x="1015" y="0" />
+			<point x="950" y="195" />
+			<point x="865" y="215" />
+			<point x="726" y="0" />
+		</poligono>
+		
+		<poligono id="10">
+			<point x="1015" y="0" />
+			<point x="1280" y="0" />
+			<point x="1280" y="90" />
+			<point x="1270" y="120" />
+			<point x="950" y="195" />
+			<point x="1015" y="0" />
+		</poligono>
+	
+		<poligono id="11">
+			<point x="1280" y="90" />
+			<point x="1280" y="300" />
+			<point x="1230" y="325" />
+			<point x="1270" y="120" />
+			<point x="1280" y="90" />
+		</poligono>
+		
+		<poligono id="12">
+			<point x="950" y="195" />
+			<point x="1270" y="120" />
+			<point x="1230" y="325" />
+			<point x="1010" y="440" />
+			<point x="915" y="295" />
+			<point x="950" y="195" />
+		</poligono>
+		
+		<poligono id="13">
+			<point x="865" y="215" />
+			<point x="950" y="195" />
+			<point x="915" y="295" />
+			<point x="865" y="215" />
+		</poligono>
+		
+		<poligono id="14">
+			<point x="770" y="240" />
+			<point x="865" y="215" />
+			<point x="1010" y="440" />
+			<point x="805" y="415" />
+			<point x="770" y="240" />
+		</poligono>
+		
+		<poligono id="15">
+			<point x="464" y="305" />
+			<point x="770" y="240" />
+			<point x="805" y="415" />
+			<point x="415" y="363" />
+			<point x="464" y="305" />
+		</poligono>
+		
+		<poligono id="16">
+			<point x="250" y="350" />
+			<point x="390" y="320" />
+			<point x="464" y="305" />
+			<point x="415" y="363" />
+			<point x="410" y="375" />
+			<point x="250" y="350" />
+		</poligono>
+		
+		<poligono id="17">
+			<point x="70" y="327" />
+			<point x="250" y="350" />
+			<point x="100" y="390" />
+			<point x="70" y="327" />
+		</poligono>
+		
+		<poligono id="18">
+			<point x="0" y="316" />
+			<point x="70" y="327" />
+			<point x="100" y="390" />
+			<point x="0" y="410" />
+			<point x="0" y="316" />
+		</poligono>
+		
+		<poligono id="19">
+			<point x="0" y="410" />
+			<point x="100" y="390" />
+			<point x="205" y="630" />
+			<point x="65" y="800" />
+			<point x="0" y="800" />
+			<point x="0" y="410" />
+		</poligono>
+		
+		<poligono id="20">
+			<point x="100" y="390" />
+			<point x="250" y="350" />
+			<point x="410" y="375" />
+			<point x="205" y="630" />
+			<point x="100" y="390" />
+		</poligono>
+		
+		<poligono id="21">
+			<point x="205" y="630" />
+			<point x="280" y="800" />
+			<point x="65" y="800" />
+			<point x="205" y="630" />
+		</poligono>
+		
+		<poligono id="22">
+			<point x="415" y="363" />
+			<point x="607" y="655" />
+			<point x="336" y="800" />
+			<point x="280" y="800" />
+			<point x="205" y="630" />
+			<point x="415" y="363" />
+		</poligono>
+		
+		<poligono id="23">
+			<point x="607" y="655" />
+			<point x="700" y="800" />
+			<point x="336" y="800" />
+			<point x="607" y="655" />
+		</poligono>
+		
+		<poligono id="24">
+			<point x="415" y="363" />
+			<point x="832" y="535" />
+			<point x="607" y="655" />
+			<point x="415" y="363" />
+		</poligono>
+		
+		<poligono id="25">
+			<point x="415" y="363" />
+			<point x="805" y="415" />
+			<point x="832" y="535" />
+			<point x="415" y="363" />
+		</poligono>
+		
+		<poligono id="26">
+			<point x="805" y="415" />
+			<point x="1010" y="440" />
+			<point x="832" y="535" />
+			<point x="805" y="415" />
+		</poligono>
+		
+		<poligono id="27">
+			<point x="607" y="655" />
+			<point x="832" y="535" />
+			<point x="745" y="800" />
+			<point x="700" y="800" />
+			<point x="607" y="655" />
+		</poligono>
+		
+		<poligono id="28">
+			<point x="832" y="535" />
+			<point x="890" y="800" />
+			<point x="745" y="800" />
+			<point x="832" y="535" />
+		</poligono>
+		
+		<poligono id="29">
+			<point x="832" y="535" />
+			<point x="1010" y="440" />
+			<point x="1020" y="460" />
+			<point x="1125" y="625" />
+			<point x="910" y="800" />
+			<point x="890" y="800" />
+			<point x="832" y="535" />
+		</poligono>
+		
+		<poligono id="30">
+			<point x="1010" y="440" />
+			<point x="1230" y="325" />
+			<point x="1200" y="483" />
+			<point x="1020" y="460" />
+			<point x="1010" y="440" />
+		</poligono>
+		
+		<poligono id="31">
+			<point x="1230" y="325" />
+			<point x="1280" y="300" />
+			<point x="1280" y="493" />
+			<point x="1200" y="483" />
+			<point x="1230" y="325" />
+		</poligono>
+		
+		<poligono id="32">
+			<point x="1020" y="460" />
+			<point x="1280" y="493" />
+			<point x="1178" y="580" />
+			<point x="1125" y="625" />
+			<point x="1020" y="460" />
+		</poligono>
+		
+		<poligono id="33">
+			<point x="1125" y="625" />
+			<point x="1160" y="676" />
+			<point x="1136" y="800" />
+			<point x="910" y="800" />
+			<point x="1125" y="625" />
+		</poligono>
+		
+		<poligono id="34">
+			<point x="1125" y="625" />
+			<point x="1178" y="580" />
+			<point x="1160" y="676" />
+			<point x="1125" y="625" />
+		</poligono>
+		
+		<poligono id="35">
+			<point x="1178" y="580" />
+			<point x="1280" y="493" />
+			<point x="1280" y="800" />
+			<point x="1238" y="800" />
+			<point x="1160" y="676" />
+			<point x="1178" y="580" />
+		</poligono>
+		
+		<poligono id="36">
+			<point x="1160" y="676" />
+			<point x="1238" y="800" />
+			<point x="1136" y="800" />
+			<point x="1160" y="676" />
+		</poligono>
+	</triangulate>
+</data>

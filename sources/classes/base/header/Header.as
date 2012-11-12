@@ -1,13 +1,13 @@
-package views {
+package base.header {
 	import flash.display.*;
 	import flash.events.*;
 	import flash.utils.*;
 	import flash.text.*;
 	import flash.net.*;
 
-	public final class Home extends Sprite {
-
-		public function Home() {
+	public final class Header extends Sprite {
+		
+		public function Header() {
 			super();
 		}
 

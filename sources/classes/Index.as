@@ -1,26 +1,72 @@
 package {
+	import com.ad.templates.*;
+	import com.ad.common.*;
+	import com.ad.events.*;
+	import com.ad.utils.*;
+	import com.ad.data.*;
+	import com.ad.core.*;
+	import com.ad.net.*;
+	import com.greensock.loading.*;
+	import com.greensock.plugins.*;
+	import com.greensock.easing.*;
+	import com.greensock.events.*;
+	import com.greensock.*;
 	import flash.display.*;
 	import flash.events.*;
+	import flash.utils.*;
 	import flash.text.*;
 	import flash.net.*;
+	import base.typography.*;
+	import views.*;
 
 	[SWF(width='550', height='400', frameRate='31', backgroundColor='#ddd')]
-	public final class Index extends Sprite {
+	public final class Index extends SpriteBase {
+		private var _app:Application;
 
 		public function Index() {
 			super();
 		}
 
-		protected function initialize():void {
-			
+		override protected function initialize():void {
+			_app = Application.getInstance();
+			_app.plugins(AutoAlphaPlugin);
+			_app.loaders(XMLLoader, SWFLoader);
+			_app.classes(Base, Home, Contact);
+			_app.addEventListener(LoaderEvent.PROGRESS, progress);
+			_app.addEventListener(LoaderEvent.COMPLETE, complete);
+			_app.fromXML('{@fvBaseContent}content/settings/sitemap.xml');
+			_app.onReady = ready;
+			_app.startup(this);
 		}
 
-		protected function finalize():void {
-			
+		override protected function finalize():void {
+			_app.dispose(true);
+			_app = null;
 		}
 
-		public function arrange():void {
+		override public function arrange():void {
+			// N/A yet.
+		}
 
+		private function ready():void {
+			_app.layers('layers');
+		}
+
+		private function progress(event:LoaderEvent):void {
+			trace(sprintf(Math.round(event.target.progress * 100), 3));
+		}
+
+		private function complete(event:LoaderEvent):void {
+			Fonts.registerFonts();
+			startup();
+		}
+
+		private function startup():void {
+			_app.params('parameters')
+			.tracks('tracks')
+			.links('links')
+			.texts('texts')
+			//.run('view');
 		}
 	}
 }

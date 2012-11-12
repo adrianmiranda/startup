@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+	sitemap
+	Created by Adrian Miranda on 2010-10-26.
+	Copyright (c) 2010 Adrian Miranda. All rights reserved.
+-->
+<header history="yes" strict="yes" connections="2" title="">
+	<file id="layers" url="{@fvBaseContent}content/settings/layers.xml" kb="4"/>
+	<base id="base" class="Base" standard="home" mistake="home">
+		<file id="triangulate" url="{@fvBaseContent}content/settings/triangulate.xml" kb="4"/>
+		<file id="parameters" url="{@fvBaseContent}content/settings/params.xml" kb="4"/>
+		<file id="tracks" url="{@fvBaseContent}content/settings/tracks.xml" kb="4"/>
+		<file id="texts" url="{@fvBaseContent}content/settings/texts.xml" kb="4"/>
+		<file id="links" url="{@fvBaseContent}content/settings/links.xml" kb="4"/>
+		<file id="base" url="{@fvBaseContent}content/views/base.swf" kb="4"/>
+		<view id="contact" class="views.Contact"></view>
+		<view id="home" class="views.Home"></view>
+	</base>
+</header>
