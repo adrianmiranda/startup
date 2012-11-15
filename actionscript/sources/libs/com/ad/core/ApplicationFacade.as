@@ -53,7 +53,7 @@ package com.ad.core {
 			this._navigation.addEventListener(ApplicationEvent.CHANGE, this.onChangeNavigation);
 			this._navigation.addEventListener(ApplicationEvent.CHANGE_VIEW, this.onChangeView);
 			this._navigation.addEventListener(ApplicationEvent.CHANGE_LANGUAGE, this.onChangeLanguage);
-			//this._navigation.initialize();
+			this._navigation.initialize();
 		}
 		
 		public function setTitle(value:String):void {

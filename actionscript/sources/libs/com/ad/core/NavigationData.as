@@ -81,11 +81,13 @@ package com.ad.core {
 		}
 
 		public function setLanguage(value:*):Language {
-			return null;
+			this._language = value;
+			return this._language;
 		}
 
 		public function setView(value:*):View {
-			return null;
+			this._view = value;
+			return this._view;
 		}
 
 		protected function createStackTransition(path:String, params:Object = null):void {
@@ -93,6 +95,7 @@ package com.ad.core {
 		}
 
 		override protected function startup():void {
+			this.validateHeader(this.header);
 			var params:Object = super.getParameterNames().length ? super.parameters : null;
 			var path:String = super.getPath();
 			if (super.isHome(path)) {
@@ -109,6 +112,7 @@ package com.ad.core {
 		}
 
 		override protected function change():void {
+			this.validateHeader(this.header);
 			var params:Object = super.getParameterNames().length ? super.parameters : null;
 			var path:String = super.getPath() == '/' ? '/home' : super.getPath();
 			var view:View = this.header.getView(path);

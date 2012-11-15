@@ -66,7 +66,7 @@ package {
 			.tracks('tracks')
 			.links('links')
 			.texts('texts')
-			//.run('view');
+			.run('view');
 		}
 	}
 }

@@ -29,7 +29,6 @@ package com.ad.core {
 			if (hasInstance(key)) throw new ADError(MULTITON_MESSAGE);
 			this.initializeKey(key, this);
 			this.initializeHistory();
-			this.initialize();
 		}
 		
 		public static function getInstance(key:String = null):NavigationCore {
@@ -48,7 +47,7 @@ package com.ad.core {
 			this._history = new Array();
 		}
 		
-		protected function initialize():void {
+		public function initialize():void {
 			SWFAddress.addEventListener(SWFAddressEvent.EXTERNAL_CHANGE, this.onExternalChange);
 			SWFAddress.addEventListener(SWFAddressEvent.INTERNAL_CHANGE, this.onInternalChange);
 			SWFAddress.addEventListener(SWFAddressEvent.CHANGE, this.onStartup);
@@ -200,7 +199,7 @@ package com.ad.core {
 		}
 
 		public function setTracker(tracker:String):void {
-			setTracker(tracker);
+			SWFAddress.setTracker(tracker);
 		}
 
 		public function getTitle():String {
@@ -268,7 +267,7 @@ package com.ad.core {
 		}
 
 		public function getParameterNames():Array {
-			return SWFAddress.getParameterNames();
+			return SWFAddress.getParameterNames() || [];
 		}
 
 		protected function externalChange():void {
