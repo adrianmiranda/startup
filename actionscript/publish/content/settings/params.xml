@@ -4,6 +4,36 @@
 	Created by Adrian Miranda on 2010-10-26.
 	Copyright (c) 2010 Adrian Miranda. All rights reserved.
 -->
-<params>
+<parameters>
 	
-</params>
+	<!-- SWF Options -->
+	<movie>
+		<movie frameRate="32" />
+		<movie align="TL" />
+		<movie showDefaultContextMenu="false" />
+		<movie scaleMode="noScale" />
+		<movie tabEnabled="no" />
+		<movie quality="best" />
+		<movie focusRect="no" />
+		<movie displayState="normal" />
+		<movie hideCursor="no" />
+		<movie minorVersion="1" />
+		<movie majorVersion="3" />
+		<movie version="3" />
+	</movie>
+	
+	<!-- Debug Options -->
+	<debug>
+		<debug level="0"/>
+		<debug output="no"/>
+		<debug benchmark="no" />
+		<debug omitTraces="yes" />
+		<debug warnings="yes" />
+		<debug verboseStackTraces="yes" />
+		<debug showActionScriptWarnings="yes" />
+		<debug showBindingWarnings="yes" />
+		<debug showDeprecationWarnings="yes" />
+		<debug showUnusedTypeSelectorWarnings="yes" />
+	</debug>
+	
+</parameters>
