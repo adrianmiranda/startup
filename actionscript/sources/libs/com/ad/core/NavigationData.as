@@ -49,7 +49,7 @@ package com.ad.core {
 				//value = value.split(this.language.branch).join('');
 				value = BranchUtils.arrange(value, false).toLowerCase();
 			}
-			return (value == this.view || value == this.views.root.branch || value == '/home/' || value == '/' || value == '');
+			return (value == this.view || value == this.views.root.branch || value == '/' || value == '');
 		}
 
 		public function createViews(xml:XML):void {
