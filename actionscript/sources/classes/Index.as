@@ -24,7 +24,7 @@ package {
 		private var _app:Application;
 
 		public function Index() {
-			super();
+			super(true);
 		}
 
 		override protected function initialize():void {
