@@ -58,10 +58,10 @@ package {
 
 		private function complete(event:LoaderEvent):void {
 			Fonts.registerFonts();
-			startup();
+			run();
 		}
 
-		private function startup():void {
+		private function run():void {
 			_app.params('parameters')
 			.tracks('tracks')
 			.links('links')
