@@ -26,6 +26,10 @@ package com.ad.core {
 			return instances[key] as Navigation;
 		}
 
+		public static function classes(...rest:Array):void {
+			// no need to do anything - we just want to force the classes to get compiled in the swf.
+		}
+
 		override protected function stackTransition(view:View, params:Object = null):void {
 			try {
 				if (this._section) {

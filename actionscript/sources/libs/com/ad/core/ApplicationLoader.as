@@ -35,10 +35,6 @@ package com.ad.core {
 			return instances[key] as ApplicationLoader;
 		}
 		
-		public function classes(...rest:Array):void {
-			// no need to do anything - we just want to force the classes to get compiled in the swf.
-		}
-		
 		public function loaders(...rest:Array):void {
 			LoaderMax.activate(rest.slice());
 		}

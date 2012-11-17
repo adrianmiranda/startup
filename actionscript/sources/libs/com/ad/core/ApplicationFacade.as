@@ -26,6 +26,10 @@ package com.ad.core {
 			return instances[key] as ApplicationFacade;
 		}
 		
+		public function classes(...rest:Array):void {
+			Navigation.classes(rest.slice());
+		}
+
 		override public function startup(binding:DisplayObject = null):void {
 			this.validateContainer(binding);
 			super.startup(this._container = DisplayObjectContainer(binding));
