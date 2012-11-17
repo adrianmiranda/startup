@@ -1,9 +1,9 @@
 package com.ad.core {
-	import com.ad.events.TransitionEvent;
-	import com.ad.interfaces.ISection;
 	import com.ad.data.Language;
 	import com.ad.data.View;
 	import com.ad.utils.Cleaner;
+	import com.ad.events.TransitionEvent;
+	import com.ad.interfaces.ISection;
 	import com.ad.proxy.nsapplication;
 	import com.greensock.TweenLite;
 	import com.greensock.TweenMax;
