@@ -4,10 +4,12 @@ package com.ad.core {
 	import com.ad.data.Layers;
 	import com.ad.data.Texts;
 	import com.ad.data.Links;
+	import com.ad.proxy.nsapplication;
 	
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	
+	use namespace nsapplication;
 	public final class Application extends ApplicationFacade {
 		
 		public function Application(key:String = null) {

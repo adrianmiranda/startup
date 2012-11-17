@@ -88,11 +88,11 @@ package com.ad.templates {
 		}
 		
 		public function setLanguage(value:*):void {
-			this._application.goto(value);
+			this._application.navigateTo(value);
 		}
 		
-		public function goto(value:*):void {
-			this._application.goto(value);
+		public function navigateTo(value:*):void {
+			this._application.navigateTo(value);
 		}
 		
 		public function go(delta:int):void {

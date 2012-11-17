@@ -5,6 +5,7 @@ package com.ad.core {
 	import com.ad.errors.ADError;
 	import com.ad.events.EventControl;
 	import com.ad.utils.Browser;
+	import com.ad.proxy.nsapplication;
 	import com.greensock.events.LoaderEvent;
 	import com.greensock.plugins.TweenPlugin;
 	import com.greensock.loading.core.LoaderCore;
@@ -18,6 +19,7 @@ package com.ad.core {
 	import flash.media.SoundLoaderContext;
 	import flash.system.LoaderContext;
 	
+	use namespace nsapplication;
 	public class ApplicationLoader extends ApplicationRequest {
 		private var _soundLoaderContext:SoundLoaderContext;
 		private var _loaderContext:LoaderContext;

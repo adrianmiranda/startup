@@ -3,6 +3,7 @@ package com.ad.core {
 	import com.ad.data.Header;
 	import com.ad.data.Language;
 	import com.ad.errors.ADError;
+	import com.ad.utils.BranchUtils;
 	
 	public class NavigationData extends NavigationCore {
 		private var _header:Header;
@@ -20,7 +21,7 @@ package com.ad.core {
 			return instances[key] as NavigationData;
 		}
 
-		private function validateHeader(header:Header):void {
+		protected function validateHeader(header:Header):void {
 			var error:String = '*NavigationData* Header ';
 			if (header == null) {
 				throw new ADError(error + 'missing required');
@@ -38,6 +39,15 @@ package com.ad.core {
 			super.setTracker(header.track);
 			super.setStrict(header.strict);
 			super.setTitle(header.title);
+		}
+
+		public function isHomePage(value:*):Boolean {
+			this.validateHeader(this.header);
+			if (value && value is String) {
+				//value = value.split(this.language.branch).join('');
+				value = BranchUtils.arrange(value, false).toLowerCase();
+			}
+			return (value == this.view || value == this.views.root.branch || value == '/home/' || value == '/' || value == '');
 		}
 
 		public function createViews(xml:XML):void {
@@ -68,6 +78,10 @@ package com.ad.core {
 			return this._header;
 		}
 		
+		public function get lastLanguage():Language {
+			return this._lastLanguage;
+		}
+
 		public function get language():Language {
 			return this._language;
 		}
@@ -81,16 +95,24 @@ package com.ad.core {
 		}
 
 		public function setLanguage(value:*):Language {
-			this._language = value;
+			if (value) {
+				this.validateHeader(this.header);
+				//this._lastLanguage = this._language;
+				//this._language = value;
+			}
 			return this._language;
 		}
 
 		public function setView(value:*):View {
-			this._view = value;
+			if (value) {
+				this.validateHeader(this.header);
+				this._lastView = this._view;
+				this._view = value;
+			}
 			return this._view;
 		}
 
-		protected function createStackTransition(path:String, params:Object = null):void {
+		protected function stackTransition(view:View, params:Object = null):void {
 			// to override.
 		}
 
@@ -98,15 +120,16 @@ package com.ad.core {
 			this.validateHeader(this.header);
 			var params:Object = super.getParameterNames().length ? super.parameters : null;
 			var path:String = super.getPath();
-			if (super.isHome(path)) {
-				this.navigateTo('/home', params);
+			if (this.isHomePage(path)) {
+				super.navigateTo(this.standardView.branch, params);
 			} else {
 				var view:View = this.header.getView(path);
 				if (view) {
+					this.setView(view);
 					super.setTitle(view.title);
-					this.createStackTransition(path, params);
+					this.stackTransition(view, params);
 				} else {
-					super.navigateTo('/home', params);
+					super.navigateTo(this.standardView.branch, params);
 				}
 			}
 		}
@@ -114,11 +137,15 @@ package com.ad.core {
 		override protected function change():void {
 			this.validateHeader(this.header);
 			var params:Object = super.getParameterNames().length ? super.parameters : null;
-			var path:String = super.getPath() == '/' ? '/home' : super.getPath();
+			var path:String = super.getPath() == '/' ? this.standardView.branch : super.getPath();
 			var view:View = this.header.getView(path);
 			if (view) {
+				this.setView(view);
+				this.setLanguage(view.branch);
 				super.setTitle(view.title);
-				this.createStackTransition(path, params);
+				this.stackTransition(view, params);
+			} else {
+				this.setView(this.mistakeView);
 			}
 		}
 

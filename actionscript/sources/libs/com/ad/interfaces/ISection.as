@@ -34,7 +34,7 @@ package com.ad.interfaces {
 		*/
 		
 		function set apiKey(key:String):void;
-		function goto(value:*):void;
+		function navigateTo(value:*):void;
 		function localize():void;
 	}
 }

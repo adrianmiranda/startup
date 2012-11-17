@@ -19,7 +19,7 @@ package {
 	import base.typography.*;
 	import views.*;
 
-	[SWF(width='550', height='400', frameRate='31', backgroundColor='#ddd')]
+	[SWF(width='550', height='400', frameRate='31', backgroundColor='#dddddd')]
 	public final class Index extends SpriteBase {
 		private var _app:Application;
 

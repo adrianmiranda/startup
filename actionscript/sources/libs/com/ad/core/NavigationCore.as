@@ -6,6 +6,8 @@ package com.ad.core {
 	import com.ad.utils.Browser;
 	import com.asual.SWFAddressEvent;
 	import com.asual.SWFAddress;
+
+	import flash.display.DisplayObjectContainer;
 	
 	[Event(type='ApplicationEvent', name='ApplicationEvent.EXTERNAL_CHANGE')]
 	[Event(type='ApplicationEvent', name='ApplicationEvent.INTERNAL_CHANGE')]
@@ -20,6 +22,7 @@ package com.ad.core {
 		private static var _firstKey:String;
 		private static var _title:String;
 		private static var _bread:String;
+		private var _container:DisplayObjectContainer;
 		private var _apiKey:String;
 		private var _vars:Object;
 		private var _history:Array;
@@ -29,6 +32,7 @@ package com.ad.core {
 			if (hasInstance(key)) throw new ADError(MULTITON_MESSAGE);
 			this.initializeKey(key, this);
 			this.initializeHistory();
+			this.initialize();
 		}
 		
 		public static function getInstance(key:String = null):NavigationCore {
@@ -46,8 +50,20 @@ package com.ad.core {
 		private function initializeHistory():void {
 			this._history = new Array();
 		}
+
+		protected function initialize():void {
+			// to override.
+		}
+
+		protected function validateContainer(container:DisplayObjectContainer):void {
+			var error:String = '*NavigationCore* Container ';
+			if (!container) {
+				throw new ADError(error + 'missing required');
+			}
+		}
 		
-		public function initialize():void {
+		public function run(container:DisplayObjectContainer):void {
+			this.validateContainer(this._container = container);
 			SWFAddress.addEventListener(SWFAddressEvent.EXTERNAL_CHANGE, this.onExternalChange);
 			SWFAddress.addEventListener(SWFAddressEvent.INTERNAL_CHANGE, this.onInternalChange);
 			SWFAddress.addEventListener(SWFAddressEvent.CHANGE, this.onStartup);
@@ -118,10 +134,6 @@ package com.ad.core {
 		protected function onInit(event:SWFAddressEvent):void {
 			this.init();
 			super.dispatchEvent(new ApplicationEvent(ApplicationEvent.INIT, this.apiKey));
-		}
-
-		public function isHome(value:String):Boolean {
-			return value == '/home/' || value == '/' || value == '';
 		}
 
 		public function call(jsFunction:String, ...rest:Array):* {
@@ -288,6 +300,10 @@ package com.ad.core {
 
 		protected function init():void {
 			// to override.
+		}
+
+		public function get container():DisplayObjectContainer {
+			return this._container;
 		}
 
 		public function dispose(flush:Boolean = false):void {
