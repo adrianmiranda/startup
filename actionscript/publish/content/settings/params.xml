@@ -10,7 +10,7 @@
 	<movie>
 		<movie frameRate="32" />
 		<movie align="TL" />
-		<movie showDefaultContextMenu="false" />
+		<movie showDefaultContextMenu="no" />
 		<movie scaleMode="noScale" />
 		<movie tabEnabled="no" />
 		<movie quality="best" />
