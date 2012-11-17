@@ -247,17 +247,19 @@ package com.ad.core {
 			return SWFAddress.getValue();
 		}
 
-		public function navigateTo(value:String, query:Object = null):void {
-			if (query) {
-				value = value.concat('?');
-				for (var key:String in query) {
-					value = value.concat(key + '=' + query[key] + '&');
+		public function navigateTo(value:*, query:Object = null):void {
+			if (value is String) {
+				if (query) {
+					value = value.concat('?');
+					for (var key:String in query) {
+						value = value.concat(key + '=' + query[key] + '&');
+					}
+					value = value.substring(0, (value.length - 1));
 				}
-				value = value.substring(0, (value.length - 1));
+				value = this.apiKey != version ? this.apiKey + '/' + value : value;
+				this._history[this._depth] = BranchUtils.arrange(value);
+				SWFAddress.setValue(this._history[this._depth++]);
 			}
-			value = this.apiKey != version ? this.apiKey + '/' + value : value;
-			this._history[this._depth] = BranchUtils.arrange(value);
-			SWFAddress.setValue(this._history[this._depth++]);
 		}
 
 		public function getPath():String {

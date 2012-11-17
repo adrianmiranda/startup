@@ -11,23 +11,24 @@ package views {
 	public final class Contact extends SectionLite {
 
 		public function Contact() {
-			super();
+			super(true);
+			super.alpha = 0;
 		}
 
 		override public function transitionIn():void
 		{
 			super.transitionIn();
-			super.transitionInComplete();
+			TweenLite.to(this, 0.6, { alpha:1, onComplete:super.transitionInComplete });
 		}
 
 		override public function transitionOut():void
 		{
 			super.transitionOut();
-			super.transitionOutComplete();
+			TweenLite.to(this, 0.6, { alpha:0, onComplete:super.transitionOutComplete });
 		}
 
 		override protected function initialize():void {
-			
+			trace('Contact initialised.');
 		}
 
 		override protected function finalize():void {

@@ -108,5 +108,9 @@ package com.ad.core {
 			}
 			super.dispose(flush);
 		}
+		
+		override public function toString():String {
+			return '[NavigationData' + super.apiKey + ']';
+		}
 	}
 }
