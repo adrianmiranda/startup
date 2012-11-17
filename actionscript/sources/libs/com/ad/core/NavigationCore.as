@@ -4,6 +4,7 @@ package com.ad.core {
 	import com.ad.utils.BranchUtils;
 	import com.ad.errors.ADError;
 	import com.ad.utils.Browser;
+	import com.ad.proxy.nsapplication;
 	import com.asual.SWFAddressEvent;
 	import com.asual.SWFAddress;
 
@@ -15,6 +16,7 @@ package com.ad.core {
 	[Event(type='ApplicationEvent', name='ApplicationEvent.CHANGE')]
 	[Event(type='ApplicationEvent', name='ApplicationEvent.INIT')]
 
+	use namespace nsapplication;
 	public class NavigationCore extends EventControl {
 		protected const MULTITON_MESSAGE:String = 'NavigationCore instance for this API key already initialised!';
 		protected static var instances:Array = new Array();

@@ -4,12 +4,14 @@ package com.ad.core {
 	import com.ad.data.Language;
 	import com.ad.data.View;
 	import com.ad.utils.Cleaner;
+	import com.ad.proxy.nsapplication;
 	import com.greensock.TweenLite;
 	import com.greensock.TweenMax;
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.display.DisplayObject;
 
+	use namespace nsapplication;
 	public final class Navigation extends NavigationData {
 		private var _isInterrupted:Boolean;
 		private var _transitionState:int;
@@ -43,7 +45,7 @@ package com.ad.core {
 					this._section.transitionIn();
 				}
 			} catch(event:Error) {
-				trace('[ApplicationFacade]::makeSection:', event.message);
+				trace('[ApplicationFacade]::stackTransition:', event.message);
 			}
 		}
 		

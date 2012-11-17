@@ -4,7 +4,9 @@ package com.ad.core {
 	import com.ad.data.Language;
 	import com.ad.errors.ADError;
 	import com.ad.utils.BranchUtils;
+	import com.ad.proxy.nsapplication;
 	
+	use namespace nsapplication;
 	public class NavigationData extends NavigationCore {
 		private var _header:Header;
 		private var _lastLanguage:Language;
