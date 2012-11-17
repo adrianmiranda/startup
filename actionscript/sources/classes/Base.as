@@ -1,4 +1,5 @@
 package {
+	import com.ad.templates.*;
 	import base.background.*;
 	import base.header.*;
 	import base.footer.*;
@@ -8,7 +9,7 @@ package {
 	import flash.text.*;
 	import flash.net.*;
 
-	public final class Base extends Sprite {
+	public final class Base extends SpriteBase {
 		public var background:Background;
 		public var header:Header;
 		public var footer:Footer;
@@ -17,15 +18,15 @@ package {
 			super();
 		}
 
-		protected function initialize():void {
+		override protected function initialize():void {
 			
 		}
 
-		protected function finalize():void {
+		override protected function finalize():void {
 			
 		}
 
-		public function arrange():void {
+		override public function arrange():void {
 
 		}
 	}
