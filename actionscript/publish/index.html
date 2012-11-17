@@ -75,7 +75,7 @@
 			};
 			swfobject.createCSS("html", "width:"+settings.width+";height:"+settings.height+";margin:0;padding:0;overflow:hidden;");
 			swfobject.createCSS("body", "width:"+settings.width+";height:"+settings.height+";margin:0;padding:0;overflow:hidden;");
-			swfobject.createCSS("#"+ settings.div, "width:"+ settings.width +";height:"+ settings.height +";margin:0;");
+			swfobject.createCSS("#"+settings.div, "width:"+settings.width+";height:"+settings.height+";margin:0;");
 			swfobject.embedSWF
 			(
 				  settings.swf
@@ -88,7 +88,6 @@
 				, parameters
 				, attributes
 			);
-			console.log(swfobject);
 		</script>
 	</body>
 </html>
