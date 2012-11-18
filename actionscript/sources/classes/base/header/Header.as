@@ -5,6 +5,9 @@ package base.header {
 	import flash.text.*;
 	import flash.net.*;
 
+	/**
+	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 */
 	public final class Header extends Sprite {
 		
 		public function Header() {

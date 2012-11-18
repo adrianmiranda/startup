@@ -19,6 +19,9 @@ package {
 	import base.typography.*;
 	import views.*;
 	
+	/**
+	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 */
 	[SWF(width='550', height='400', frameRate='31', backgroundColor='#dddddd')]
 	public final class Index extends SpriteBase {
 		private var _app:Application;

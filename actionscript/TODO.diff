@@ -1,0 +1,27 @@
+Fix
+===
+- External Change Event
+
+FlowManager
+===========
+
+- 0:Normal (Slideshow)
+ ------------------
+| 1. transitionOut |
+| ---------------- |
+| 2. transitionIn  |
+ ------------------
+
+- 1:Reverse (Slideshow)
+ ------------------
+| 1. transitionIn  |
+| ---------------- |
+| 2. transitionOut |
+ ------------------
+
+- 2:Cross (side-by-side)
+ ----------------------
+| 1. transitionIn/Out  |
+| -------------------- |
+| 2. transitionOut/In  |
+ ----------------------

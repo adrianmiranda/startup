@@ -7,6 +7,9 @@ package base.background {
 	import flash.text.*;
 	import flash.net.*;
 
+	/**
+	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 */
 	public final class Background extends Sprite {
 		private var _tweenGroup:TimelineLite;
 

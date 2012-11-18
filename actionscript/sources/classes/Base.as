@@ -9,6 +9,9 @@ package {
 	import flash.text.*;
 	import flash.net.*;
 
+	/**
+	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 */
 	public final class Base extends SpriteBase {
 		public var background:Background;
 		public var header:Header;

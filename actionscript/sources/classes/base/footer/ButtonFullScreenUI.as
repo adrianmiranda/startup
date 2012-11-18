@@ -5,6 +5,9 @@ package base.footer {
 	import flash.text.*;
 	import flash.net.*;
 
+	/**
+	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 */
 	public final class ButtonFullScreenUI extends Sprite {
 
 		public function ButtonFullScreenUI() {

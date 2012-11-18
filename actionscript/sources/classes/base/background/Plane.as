@@ -7,6 +7,9 @@ package base.background {
 	import flash.geom.*;
 	import flash.net.*;
 
+	/**
+	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 */
 	public final class Plane extends Sprite {
 		private var _paperSprite:PaperSprite;
 		private var _container:Sprite;

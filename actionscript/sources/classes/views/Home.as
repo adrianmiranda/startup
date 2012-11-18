@@ -8,6 +8,9 @@ package views {
 	import flash.text.*;
 	import flash.net.*;
 
+	/**
+	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 */
 	public final class Home extends SectionLite {
 
 		public function Home() {
