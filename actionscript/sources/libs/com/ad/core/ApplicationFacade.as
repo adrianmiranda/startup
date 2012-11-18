@@ -12,6 +12,9 @@ package com.ad.core {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Stage;
 	
+	/**
+	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 */
 	use namespace nsapplication;
 	public class ApplicationFacade extends ApplicationLoader {
 		private var _container:DisplayObjectContainer;

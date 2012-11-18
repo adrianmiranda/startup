@@ -16,6 +16,9 @@ package com.ad.core {
 	[Event(type='ApplicationEvent', name='ApplicationEvent.CHANGE')]
 	[Event(type='ApplicationEvent', name='ApplicationEvent.INIT')]
 
+	/**
+	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 */
 	use namespace nsapplication;
 	public class NavigationCore extends EventControl {
 		protected const MULTITON_MESSAGE:String = 'NavigationCore instance for this API key already initialised!';
@@ -68,7 +71,7 @@ package com.ad.core {
 			this.validateContainer(this._container = container);
 			SWFAddress.addEventListener(SWFAddressEvent.EXTERNAL_CHANGE, this.onExternalChange);
 			SWFAddress.addEventListener(SWFAddressEvent.INTERNAL_CHANGE, this.onInternalChange);
-			SWFAddress.addEventListener(SWFAddressEvent.CHANGE, this.onStartup);
+			SWFAddress.addEventListener(SWFAddressEvent.CHANGE, this.onStartup, false, 0, true);
 			SWFAddress.addEventListener(SWFAddressEvent.INIT, this.onInit);
 		}
 		
@@ -123,7 +126,7 @@ package com.ad.core {
 
 		protected function onStartup(event:SWFAddressEvent):void {
 			SWFAddress.addEventListener(SWFAddressEvent.CHANGE, this.onChange);
-			SWFAddress.removeEventListener(SWFAddressEvent.CHANGE, this.onStartup);
+			SWFAddress.removeEventListener(SWFAddressEvent.CHANGE, this.onStartup, false);
 			this.startup();
 			super.dispatchEvent(new ApplicationEvent(ApplicationEvent.STARTUP, this.apiKey));
 		}

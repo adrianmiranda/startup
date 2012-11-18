@@ -6,6 +6,9 @@ package com.ad.core {
 	import com.ad.utils.BranchUtils;
 	import com.ad.proxy.nsapplication;
 	
+	/**
+	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 */
 	use namespace nsapplication;
 	public class NavigationData extends NavigationCore {
 		private var _header:Header;
@@ -137,6 +140,7 @@ package com.ad.core {
 		}
 
 		override protected function change():void {
+			trace('change');
 			this.validateHeader(this.header);
 			var params:Object = super.getParameterNames().length ? super.parameters : null;
 			var path:String = super.getPath() == '/' ? this.standardView.branch : super.getPath();
@@ -153,11 +157,11 @@ package com.ad.core {
 
 		override public function dispose(flush:Boolean = false):void {
 			if (flush) {
-				_header = null;
-				_lastLanguage = null;
-				_language = null;
-				_lastView = null;
-				_view = null;
+				this._header = null;
+				this._lastLanguage = null;
+				this._language = null;
+				this._lastView = null;
+				this._view = null;
 			}
 			super.dispose(flush);
 		}

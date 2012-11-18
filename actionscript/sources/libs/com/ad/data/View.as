@@ -9,7 +9,7 @@ package com.ad.data {
 	import flash.utils.getDefinitionByName;
 	
 	/**
-	 * @author Adrian C. Miranda
+	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
 	 */
 	public final class View {
 		internal namespace nsarmored = 'http://www.adrianmiranda.com.br/com/adframework/core/data/view.nsarmored';

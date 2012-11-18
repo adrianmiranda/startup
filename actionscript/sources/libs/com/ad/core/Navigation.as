@@ -11,6 +11,9 @@ package com.ad.core {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.DisplayObject;
 
+	/**
+	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 */
 	use namespace nsapplication;
 	public final class Navigation extends NavigationData {
 		private var _isInterrupted:Boolean;
