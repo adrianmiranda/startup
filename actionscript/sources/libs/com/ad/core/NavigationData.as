@@ -136,13 +136,21 @@ package com.ad.core {
 			return this._view;
 		}
 
-		protected function stackTransition(view:View, params:Object = null):void {
-			// to override.
-		}
-
 		override public function navigateTo(value:*, query:Object = null):void {
-			this.setLanguage(value);
-			super.navigateTo(value, query);
+			this.validateHeader(this.header);
+			value = BranchUtils.arrange(value);
+			var path:String = BranchUtils.cleanup(value);
+			var params:String = BranchUtils.getQueryString(value, true);
+			var section:View, suffix:String = new String();
+			this.setLanguage(path);
+			path = path.split(this.language.branch).join('');
+			path = this.isHomePage(path) ? this.standardView.branch : path;
+			section = header.getView(path) || this.view;
+			if (path.indexOf(section.branch) > -1) {
+				path = BranchUtils.trimQueryString(path);
+				suffix = path.substr(path.indexOf(section.branch) + section.branch.length, path.length);
+			}
+			super.navigateTo(BranchUtils.arrange(language.branch + '/' + section.branch + suffix + params), query);
 		}
 
 		override protected function startup():void {
@@ -179,6 +187,10 @@ package com.ad.core {
 			}
 		}
 
+		protected function stackTransition(view:View, params:Object = null):void {
+			// to override.
+		}
+
 		override public function dispose(flush:Boolean = false):void {
 			if (flush) {
 				this._header = null;
@@ -195,3 +207,39 @@ package com.ad.core {
 		}
 	}
 }
+/*
+public function setView(value:*):View {
+	var section:View;
+	if (value) {
+		this.validateHeader(this.header);
+		if (value is String) {
+			value = BranchUtils.arrange(value);
+			value = this.isHomePage(value) ? this.standardView.branch : value;
+			value = value.split(this.language.branch).join('');
+		}
+		section = this.header.getView(value) || this.mistakeView;
+		if (section) {
+			var suffix:String = new String();
+			if (value is String && value.indexOf(section.branch) > -1) {
+				suffix = value.substr(value.indexOf(section.branch) + section.branch.length, value.length);
+			}
+			if (view) {
+				if (section.branch != this.view.branch) {
+					this._lastView = this._view;
+					this._view = section;
+					//_history[_index++] = BranchUtils.arrange(this.language.branch + '/' + this.view.branch + suffix);
+					super.setTitle(this.view.title, _delimiter);
+					super.dispatchEvent(new ApplicationEvent(ApplicationEvent.CHANGE_VIEW, this.apiKey));
+				}
+			} else {
+				this._lastView = section;
+				this._view = section || this.mistakeView;
+				//_history[_index++] = BranchUtils.arrange(this.language.branch + '/' + this.view.branch + suffix);
+				super.setTitle(this.view.title, _delimiter);
+				super.dispatchEvent(new ApplicationEvent(ApplicationEvent.CHANGE_VIEW, this.apiKey));
+			}
+		}
+	}
+	return section;
+}
+*/
