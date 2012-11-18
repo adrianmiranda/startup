@@ -78,7 +78,7 @@ package com.asual {
             if (_availability) {
                 try {
                     _availability = 
-                        ExternalInterface.call('function() { return (typeof SWFAddress != "undefined"); }') 
+                        ExternalInterface.call("function() { return (typeof SWFAddress != 'undefined'); }")// Bug!!! 
                             as Boolean;
                     ExternalInterface.addCallback('getSWFAddressValue', 
                         function():String {return _value});

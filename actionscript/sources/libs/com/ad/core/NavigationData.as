@@ -121,6 +121,10 @@ package com.ad.core {
 			// to override.
 		}
 
+		override public function navigateTo(value:*, query:Object = null):void {
+			super.navigateTo(value, query);
+		}
+
 		override protected function startup():void {
 			this.validateHeader(this.header);
 			var params:Object = super.getParameterNames().length ? super.parameters : null;
@@ -140,7 +144,6 @@ package com.ad.core {
 		}
 
 		override protected function change():void {
-			trace('change');
 			this.validateHeader(this.header);
 			var params:Object = super.getParameterNames().length ? super.parameters : null;
 			var path:String = super.getPath() == '/' ? this.standardView.branch : super.getPath();
@@ -171,3 +174,65 @@ package com.ad.core {
 		}
 	}
 }
+/*
+public static function setView(value:*):View {
+	var section:View;
+	if (value != null) {
+		this.validateHeader(this.header);
+		if (value is String) {
+			value = BranchUtils.arrange(value);
+			value = this.isHomePage(value) ? this.standardView.branch : value;
+			//value = value.split(this.language.branch).join('');
+		}
+		section = this.header.getView(value) || this.mistakeView;
+		if (section) {
+			var suffix:String = new String();
+			if (value is String && value.indexOf(section.branch) > -1) {
+				suffix = value.substr(value.indexOf(section.branch) + section.branch.length, value.length);
+			}
+			if (this.view) {
+				if (section.branch != view.branch) {
+					this._lastView = this._view;
+					this._view = section;
+					this._history[_index++] = BranchUtils.arrange(this.language.branch + '/' + this.view.branch + suffix);
+					super.setTitle(this.view.title, _delimiter);
+					notifyChangeView();
+				}
+			} else {
+				this._lastView = section;
+				this._view = section || this.mistakeView;
+				this._history[_index++] = BranchUtils.arrange(this.language.branch + '/' + this.view.branch + suffix);
+				super.setTitle(view.title, _delimiter);
+				notifyChangeView();
+			}
+		}
+	}
+	return section;
+}
+
+public static function setLanguage(value:*):Language {
+	var locale:Language, history:Boolean;
+	if (value) {
+		this.validateHeader(this.header);
+		locale = this.languages.getLanguage(value);
+		if (locale) {
+			locale = locale.tree;
+			if (this.language) {
+				if (locale.branch != language.branch) {
+					this._language = locale;
+					notifyChangeLanguage();
+				}
+			} else {
+				this._language = locale;
+				notifyChangeLanguage();
+			}
+		} else {
+			history = super.getHistory();
+			super.setHistory(false);
+			super.setValue(BranchUtils.arrange(this.language.branch + '/' + this.view.branch));
+			super.setHistory(history);
+		}
+	}
+	return locale;
+}
+*/

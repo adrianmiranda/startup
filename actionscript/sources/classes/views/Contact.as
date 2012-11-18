@@ -15,14 +15,12 @@ package views {
 			super.alpha = 0;
 		}
 
-		override public function transitionIn():void
-		{
+		override public function transitionIn():void {
 			super.transitionIn();
 			TweenLite.to(this, 0.6, { alpha:1, onComplete:super.transitionInComplete });
 		}
 
-		override public function transitionOut():void
-		{
+		override public function transitionOut():void {
 			super.transitionOut();
 			TweenLite.to(this, 0.6, { alpha:0, onComplete:super.transitionOutComplete });
 		}
