@@ -39,8 +39,8 @@ package com.ad.core {
 
 		public function registerViews(header:Header):void {
 			this.validateHeader(this._header = header);
-			this.setLanguage(this.standardLanguage);
-			this.setView(this.standardView);
+			this.setStandardLanguage();
+			this.setStandardView();
 			super.setHistory(header.history);
 			super.setTracker(header.track);
 			super.setStrict(header.strict);
@@ -99,6 +99,17 @@ package com.ad.core {
 		public function get view():View {
 			return this._view;
 		}
+		
+		private function setStandardLanguage():void {
+			this._lastLanguage = this.standardLanguage;
+			this._language = this.standardLanguage;
+		}
+
+		private function setStandardView():void {
+			this._lastView = this.standardView;
+			this._view = this.standardView;
+			super.setTitle(this.view.title);
+		}
 
 		public function setLanguage(value:*):Language {
 			var locale:Language;
@@ -107,13 +118,7 @@ package com.ad.core {
 				locale = this.languages.getLanguage(value);
 				if (locale) {
 					locale = locale.tree;
-					if (this.language) {
-						if (locale.branch != language.branch) {
-							this._lastLanguage = this._language;
-							this._language = locale;
-							super.dispatchEvent(new ApplicationEvent(ApplicationEvent.CHANGE_LANGUAGE, this.apiKey));
-						}
-					} else {
+					if (locale.branch != language.branch) {
 						this._lastLanguage = this._language;
 						this._language = locale;
 						super.dispatchEvent(new ApplicationEvent(ApplicationEvent.CHANGE_LANGUAGE, this.apiKey));
@@ -128,12 +133,29 @@ package com.ad.core {
 		}
 
 		public function setView(value:*):View {
+			var section:View;
 			if (value) {
 				this.validateHeader(this.header);
-				this._lastView = this._view;
-				this._view = value;
+				if (value is String) {
+					value = BranchUtils.arrange(value);
+					value = this.isHomePage(value) ? this.standardView.branch : value;
+					value = value.split(this.language.branch).join('');
+				}
+				section = this.header.getView(value) || this.mistakeView;
+				if (section) {
+					var suffix:String = new String();
+					if (value is String && value.indexOf(section.branch) > -1) {
+						suffix = value.substr(value.indexOf(section.branch) + section.branch.length, value.length);
+					}
+					if (section.branch != this.view.branch) {
+						this._lastView = this._view;
+						this._view = section;
+						super.setTitle(this.view.title);
+						super.dispatchEvent(new ApplicationEvent(ApplicationEvent.CHANGE_VIEW, this.apiKey));
+					}
+				}
 			}
-			return this._view;
+			return section;
 		}
 
 		override public function navigateTo(value:*, query:Object = null):void {
@@ -207,39 +229,3 @@ package com.ad.core {
 		}
 	}
 }
-/*
-public function setView(value:*):View {
-	var section:View;
-	if (value) {
-		this.validateHeader(this.header);
-		if (value is String) {
-			value = BranchUtils.arrange(value);
-			value = this.isHomePage(value) ? this.standardView.branch : value;
-			value = value.split(this.language.branch).join('');
-		}
-		section = this.header.getView(value) || this.mistakeView;
-		if (section) {
-			var suffix:String = new String();
-			if (value is String && value.indexOf(section.branch) > -1) {
-				suffix = value.substr(value.indexOf(section.branch) + section.branch.length, value.length);
-			}
-			if (view) {
-				if (section.branch != this.view.branch) {
-					this._lastView = this._view;
-					this._view = section;
-					//_history[_index++] = BranchUtils.arrange(this.language.branch + '/' + this.view.branch + suffix);
-					super.setTitle(this.view.title, _delimiter);
-					super.dispatchEvent(new ApplicationEvent(ApplicationEvent.CHANGE_VIEW, this.apiKey));
-				}
-			} else {
-				this._lastView = section;
-				this._view = section || this.mistakeView;
-				//_history[_index++] = BranchUtils.arrange(this.language.branch + '/' + this.view.branch + suffix);
-				super.setTitle(this.view.title, _delimiter);
-				super.dispatchEvent(new ApplicationEvent(ApplicationEvent.CHANGE_VIEW, this.apiKey));
-			}
-		}
-	}
-	return section;
-}
-*/

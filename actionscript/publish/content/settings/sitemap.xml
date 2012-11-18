@@ -5,6 +5,13 @@
 	Copyright (c) 2010 Adrian Miranda. All rights reserved.
 -->
 <header history="yes" strict="yes" connections="2" flow="normal" title="Sample">
+	<languages standard="pt">
+		<language id="pt" track="Clicou_Botao_Portugues">
+			<language id="br" track="Clicou_Botao_Portugues_BR"/>
+		</language>
+		<language id="es" track="Clicou_Botao_Espanol"/>
+		<language id="en" track="Clicou_Botao_English"/>
+	</languages>
 	<file id="layers" url="{@fvBaseContent}content/settings/layers.xml" kb="4"/>
 	<base id="base" class="Base" standard="home" mistake="home">
 		<file id="triangulate" url="{@fvBaseContent}content/settings/triangulate.xml" kb="4"/>

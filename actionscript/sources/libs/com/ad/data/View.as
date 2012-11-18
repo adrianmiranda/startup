@@ -141,7 +141,7 @@ package com.ad.data {
 					}
 				}
 			}
-			if (value && value.indexOf(this.branch) > -1) {
+			if (value is String && value.indexOf(this.branch) > -1) {
 				return this.getView(value.substr(value.indexOf(this.branch), this.branch.length));
 			}
 			return null;

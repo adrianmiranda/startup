@@ -125,7 +125,7 @@ package com.ad.data {
 					}
 				}
 			}
-			if (value && this.branch && value.indexOf(this.branch) > -1) {
+			if (this.branch && value is String && value.indexOf(this.branch) > -1) {
 				return this.getLanguage(value.substr(0, this.branch.length));
 			}
 			return null;
