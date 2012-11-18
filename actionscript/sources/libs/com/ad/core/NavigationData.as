@@ -5,6 +5,7 @@ package com.ad.core {
 	import com.ad.errors.ADError;
 	import com.ad.utils.BranchUtils;
 	import com.ad.proxy.nsapplication;
+	import com.ad.events.ApplicationEvent;
 	
 	/**
 	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
@@ -49,7 +50,7 @@ package com.ad.core {
 		public function isHomePage(value:*):Boolean {
 			this.validateHeader(this.header);
 			if (value && value is String) {
-				//value = value.split(this.language.branch).join('');
+				value = value.split(this.language.branch).join('');
 				value = BranchUtils.arrange(value, false).toLowerCase();
 			}
 			return (value == this.view || value == this.views.root.branch || value == '/' || value == '');
@@ -100,12 +101,30 @@ package com.ad.core {
 		}
 
 		public function setLanguage(value:*):Language {
+			var locale:Language;
 			if (value) {
 				this.validateHeader(this.header);
-				//this._lastLanguage = this._language;
-				//this._language = value;
+				locale = this.languages.getLanguage(value);
+				if (locale) {
+					locale = locale.tree;
+					if (this.language) {
+						if (locale.branch != language.branch) {
+							this._lastLanguage = this._language;
+							this._language = locale;
+							super.dispatchEvent(new ApplicationEvent(ApplicationEvent.CHANGE_LANGUAGE, this.apiKey));
+						}
+					} else {
+						this._lastLanguage = this._language;
+						this._language = locale;
+						super.dispatchEvent(new ApplicationEvent(ApplicationEvent.CHANGE_LANGUAGE, this.apiKey));
+					}
+				} else {
+					super.setHistory(false);
+					super.navigateTo(BranchUtils.arrange(this.language.branch + '/' + this.view.branch));
+					super.setHistory(header.history);
+				}
 			}
-			return this._language;
+			return locale;
 		}
 
 		public function setView(value:*):View {
@@ -122,6 +141,7 @@ package com.ad.core {
 		}
 
 		override public function navigateTo(value:*, query:Object = null):void {
+			this.setLanguage(value);
 			super.navigateTo(value, query);
 		}
 
@@ -136,6 +156,7 @@ package com.ad.core {
 				if (view) {
 					this.setView(view);
 					super.setTitle(view.title);
+					this.setLanguage(view.branch);
 					this.stackTransition(view, params);
 				} else {
 					super.navigateTo(this.standardView.branch, params);
@@ -150,8 +171,8 @@ package com.ad.core {
 			var view:View = this.header.getView(path);
 			if (view) {
 				this.setView(view);
-				this.setLanguage(view.branch);
 				super.setTitle(view.title);
+				this.setLanguage(view.branch);
 				this.stackTransition(view, params);
 			} else {
 				this.setView(this.mistakeView);
@@ -174,65 +195,3 @@ package com.ad.core {
 		}
 	}
 }
-/*
-public static function setView(value:*):View {
-	var section:View;
-	if (value != null) {
-		this.validateHeader(this.header);
-		if (value is String) {
-			value = BranchUtils.arrange(value);
-			value = this.isHomePage(value) ? this.standardView.branch : value;
-			//value = value.split(this.language.branch).join('');
-		}
-		section = this.header.getView(value) || this.mistakeView;
-		if (section) {
-			var suffix:String = new String();
-			if (value is String && value.indexOf(section.branch) > -1) {
-				suffix = value.substr(value.indexOf(section.branch) + section.branch.length, value.length);
-			}
-			if (this.view) {
-				if (section.branch != view.branch) {
-					this._lastView = this._view;
-					this._view = section;
-					this._history[_index++] = BranchUtils.arrange(this.language.branch + '/' + this.view.branch + suffix);
-					super.setTitle(this.view.title, _delimiter);
-					notifyChangeView();
-				}
-			} else {
-				this._lastView = section;
-				this._view = section || this.mistakeView;
-				this._history[_index++] = BranchUtils.arrange(this.language.branch + '/' + this.view.branch + suffix);
-				super.setTitle(view.title, _delimiter);
-				notifyChangeView();
-			}
-		}
-	}
-	return section;
-}
-
-public static function setLanguage(value:*):Language {
-	var locale:Language, history:Boolean;
-	if (value) {
-		this.validateHeader(this.header);
-		locale = this.languages.getLanguage(value);
-		if (locale) {
-			locale = locale.tree;
-			if (this.language) {
-				if (locale.branch != language.branch) {
-					this._language = locale;
-					notifyChangeLanguage();
-				}
-			} else {
-				this._language = locale;
-				notifyChangeLanguage();
-			}
-		} else {
-			history = super.getHistory();
-			super.setHistory(false);
-			super.setValue(BranchUtils.arrange(this.language.branch + '/' + this.view.branch));
-			super.setHistory(history);
-		}
-	}
-	return locale;
-}
-*/

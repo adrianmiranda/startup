@@ -108,7 +108,10 @@ package com.ad.core {
 
 		override public function dispose(flush:Boolean = false):void {
 			if (flush) {
-				this._section = null;
+				if (this._section) {
+					this._section.die();
+					this._section = null;
+				}
 			}
 			super.dispose(flush);
 		}
