@@ -331,7 +331,7 @@ package com.ad.core {
 		}
 		
 		override public function toString():String {
-			return '[NavigationCore' + this.apiKey + ']';
+			return '[NavigationCore ' + this.apiKey + ']';
 		}
 	}
 }

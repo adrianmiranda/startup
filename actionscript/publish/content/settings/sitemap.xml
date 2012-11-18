@@ -4,7 +4,7 @@
 	Created by Adrian Miranda on 2010-10-26.
 	Copyright (c) 2010 Adrian Miranda. All rights reserved.
 -->
-<header history="yes" strict="yes" connections="2" title="">
+<header history="yes" strict="yes" connections="2" flow="normal" title="Sample">
 	<file id="layers" url="{@fvBaseContent}content/settings/layers.xml" kb="4"/>
 	<base id="base" class="Base" standard="home" mistake="home">
 		<file id="triangulate" url="{@fvBaseContent}content/settings/triangulate.xml" kb="4"/>

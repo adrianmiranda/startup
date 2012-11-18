@@ -170,7 +170,7 @@ package com.ad.core {
 		}
 
 		override public function toString():String {
-			return '[NavigationData' + super.apiKey + ']';
+			return '[NavigationData ' + super.apiKey + ']';
 		}
 	}
 }

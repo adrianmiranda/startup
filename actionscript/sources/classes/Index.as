@@ -31,7 +31,7 @@ package {
 		}
 
 		override protected function initialize():void {
-			_app = Application.getInstance();
+			_app = Application.getInstance('adrianmiranda');
 			_app.plugins(AutoAlphaPlugin);
 			_app.loaders(XMLLoader, SWFLoader);
 			_app.classes(Base, Home, Contact);
