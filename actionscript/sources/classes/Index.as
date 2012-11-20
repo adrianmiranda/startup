@@ -56,7 +56,7 @@ package {
 		}
 
 		private function progress(event:LoaderEvent):void {
-			trace(sprintf(Math.round(event.target.progress * 100), 3));
+			//trace(sprintf(Math.round(event.target.progress * 100), 3));
 		}
 
 		private function complete(event:LoaderEvent):void {

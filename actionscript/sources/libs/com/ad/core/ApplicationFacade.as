@@ -44,7 +44,7 @@ package com.ad.core {
 		}
 		
 		public function run(viewLayerId:String = null):void {
-			this._navigation.registerViews(super.header);
+			this._navigation.fromHeader(super.header);
 			this._navigation.addEventListener(ApplicationEvent.INIT, this.onInitNavigation);
 			this._navigation.addEventListener(ApplicationEvent.CHANGE, this.onChangeNavigation);
 			this._navigation.addEventListener(ApplicationEvent.CHANGE_VIEW, this.onChangeView);
