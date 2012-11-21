@@ -21,7 +21,7 @@ package com.ad.core {
 			super.setStrict(header.strict);
 			super.setTitle(header.title);
 
-			trace('::::', view::get('pt'));
+			trace('::":', this.lang::get(this.languages.standard));
 		}
 
 		override protected function startup():void {
@@ -97,7 +97,7 @@ package com.ad.core {
 			var locale:Language;
 			if (value) {
 				this.validateHeader(this.header);
-				locale = this.languages.getLanguage(value);
+				locale = this.lang::get(value);
 				if (locale) {
 					locale = locale.tree;
 					if (locale.branch != language.branch) {
@@ -169,8 +169,9 @@ package com.ad.core {
 		 * DEV
 		 *
 		 */
-		private namespace lang = 'com.ad.data.Language';
-		private namespace view = 'com.ad.data.View';
+		protected namespace lang = 'com.ad.data.Language';
+		protected namespace view = 'com.ad.data.View';
+		protected namespace data = 'com.ad.data';
 		private var _header:Header;
 		private var _lastLanguage:Language;
 		private var _language:Language;
@@ -226,7 +227,7 @@ package com.ad.core {
 		}
 		
 		public function get standardLanguage():Language {
-			return this.languages ? this.languages.getLanguage(this.languages.standard) : null;
+			return this.languages ? this.lang::get(this.languages.standard) : null;
 		}
 		
 		public function get languages():Language {
