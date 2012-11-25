@@ -265,6 +265,10 @@ package com.ad.core {
 			}
 		}
 
+		public function reload():void {
+			// N/A yet.
+		}
+
 		public function getPath():String {
 			return SWFAddress.getPath();
 		}

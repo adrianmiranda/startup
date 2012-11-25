@@ -158,6 +158,10 @@ package com.ad.core {
 		public function navigateTo(value:*, query:Object = null):void {
 			this._navigation.navigateTo(value, query);
 		}
+
+		public function reload():void {
+			this._navigation.reload();
+		}
 		
 		public function go(delta:int):void {
 			this._navigation.go(delta);
