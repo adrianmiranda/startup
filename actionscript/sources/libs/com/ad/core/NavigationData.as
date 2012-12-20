@@ -20,8 +20,6 @@ package com.ad.core {
 			super.setTracker(header.track);
 			super.setStrict(header.strict);
 			super.setTitle(header.title);
-
-			trace('::":', this.lang::get(this.languages.standard));
 		}
 
 		override protected function startup():void {

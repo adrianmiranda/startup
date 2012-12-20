@@ -31,7 +31,8 @@ preview2="http://localhost:8000/"
 #
 # support
 #
-flexpath="/Users/adrianmiranda/addons/SDKs/flex_sdk_4.6.0"
+flexpath="/Users/pivot/Addons/SDKs/flex_sdk_4"
+# flexpath="/Users/adrianmiranda/addons/SDKs/flex_sdk_4.6.0"
 swc="$flexpath/frameworks/libs/framework.swc $librarypath"
 mxmlc="$flexpath/bin/mxmlc"
 asdoc="$flexpath/bin/asdoc"

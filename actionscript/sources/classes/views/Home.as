@@ -7,6 +7,7 @@ package views {
 	import flash.utils.*;
 	import flash.text.*;
 	import flash.net.*;
+	import home.*;
 
 	/**
 	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
@@ -33,11 +34,11 @@ package views {
 		}
 
 		override protected function finalize():void {
-			
+			trace('Home finalised.');
 		}
 
 		override public function arrange():void {
-
+			// N/A yet.
 		}
 	}
 }
