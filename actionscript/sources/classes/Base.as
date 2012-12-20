@@ -1,13 +1,14 @@
 package {
 	import com.ad.templates.*;
-	import base.background.*;
-	import base.header.*;
-	import base.footer.*;
 	import flash.display.*;
 	import flash.events.*;
 	import flash.utils.*;
 	import flash.text.*;
 	import flash.net.*;
+	import base.background.*;
+	import base.header.*;
+	import base.footer.*;
+	import base.menu.*;
 
 	/**
 	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
@@ -16,6 +17,7 @@ package {
 		public var background:Background;
 		public var header:Header;
 		public var footer:Footer;
+		public var menu:Menu;
 
 		public function Base() {
 			super();

@@ -34,7 +34,7 @@ package {
 			_app = Application.getInstance();
 			_app.plugins(AutoAlphaPlugin);
 			_app.loaders(XMLLoader, SWFLoader);
-			_app.classes(Base, Home, Contact);
+			_app.classes(Base, Home, About, Contact);
 			_app.addEventListener(LoaderEvent.PROGRESS, progress);
 			_app.addEventListener(LoaderEvent.COMPLETE, complete);
 			_app.fromXML('{@fvBaseContent}content/settings/sitemap.xml');

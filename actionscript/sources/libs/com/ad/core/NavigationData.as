@@ -9,9 +9,11 @@ package com.ad.core {
 	
 	/**
 	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 * TODO: 
 	 */
 	use namespace nsapplication;
 	public class NavigationData extends NavigationCore {
+
 		public function fromHeader(header:Header):void {
 			this.validateHeader(this._header = header);
 			this.setStandardLanguage();
@@ -169,11 +171,11 @@ package com.ad.core {
 		 */
 		protected namespace lang = 'com.ad.data.Language';
 		protected namespace view = 'com.ad.data.View';
-		protected namespace data = 'com.ad.data';
-		private var _header:Header;
+		protected namespace path = 'com.ad.data';
 		private var _lastLanguage:Language;
 		private var _language:Language;
 		private var _lastView:View;
+		private var _header:Header;
 		private var _view:View;
 
 		public function NavigationData(key:String = null) {
@@ -214,6 +216,14 @@ package com.ad.core {
 				return lang::get(locale.standard);
 			}
 			return locale;
+		}
+
+		path function get(value:String):* {
+			var pattern:RegExp = new RegExp('(.*)('+ value +'/*$)', 'g');
+			var result:Object = pattern.exec(value);
+			trace(result[1]);
+			trace(result[2]);
+			return null;
 		}
 
 		public function get standardView():View {
