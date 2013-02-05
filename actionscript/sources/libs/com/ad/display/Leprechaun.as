@@ -1,4 +1,4 @@
-﻿package com.ad.display {
+package com.ad.display {
 	import com.ad.interfaces.IDisplay;
 	import com.ad.utils.Cleaner;
 	
@@ -167,6 +167,126 @@
 		
 		override public function toString():String {
 			return '[Leprechaun ' + super.name + ']';
+		}
+
+
+
+		//
+		// 
+		// IMovieClip proxies
+		// 
+		//
+
+		public function gotoAndStop(frame:Object, scene:String = null):void {
+			// never implement
+		}
+
+		public function gotoAndPlay(frame:Object, scene:String = null):void {
+			// never implement
+		}
+
+		public function prevFrame():void {
+			// never implement
+		}
+		
+		public function nextFrame():void {
+			// never implement
+		}
+		
+		public function nextScene():void {
+			// never implement
+		}
+		
+		public function prevScene():void {
+			// never implement
+		}
+		
+		public function stop():void {
+			// never implement
+		}
+		
+		public function play():void {
+			// never implement
+		}
+		
+		public function playTo(frame:Object, vars:Object = null):void {
+			// never implement
+		}
+		
+		public function playToBeginAndStop(vars:Object = null):void {
+			// never implement
+		}
+		
+		public function playToEndAndStop(vars:Object = null):void {
+			// never implement
+		}
+		
+		public function loopBetween(from:Object = 1, to:Object = 0, yoyo:Boolean = false, vars:Object = null):void {
+			// never implement
+		}
+		
+		public function cancelLooping():void {
+			// never implement
+		}
+		
+		public function set onCompleteFrame(closure:Function):void {
+			// never implement
+		}
+		
+		public function set trackAsMenu(value:Boolean):void {
+			// never implement
+		}
+		
+		public function set enabled(value:Boolean):void {
+			// never implement
+		}
+		
+		public function frameIsValid(frame:Object):Boolean {
+			return !1;
+		}
+		
+		public function get trackAsMenu():Boolean {
+			return !1;
+		}
+		
+		public function get enabled():Boolean {
+			return !1;
+		}
+		
+		public function getFrameByLabel(frame:String):int {
+			return 0;
+		}
+		
+		public function parseFrame(frame:Object):int {
+			return 0;
+		}
+		
+		public function get duration():Number {
+			return 0;
+		}
+		
+		public function get position():Number {
+			return 0;
+		}
+		
+		public function get currentFrame():int {
+			return 0;
+		}
+		
+		public function get framesLoaded():int {
+			return 0;
+		}
+		
+		public function get totalFrames():int{
+			return 0;
+		}
+		
+		public function get currentLabels():Array {
+			return [];
+		}
+		
+		public function get currentLabel():String {
+			return '';
 		}
 	}
 }
