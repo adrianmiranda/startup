@@ -1,4 +1,4 @@
-﻿package com.ad.display {
+package com.ad.display {
 	import com.ad.interfaces.IDisplay;
 	import com.ad.utils.Cleaner;
 	
@@ -220,7 +220,6 @@
 				this._registrationShape.graphics.lineTo(diameter, diameter);
 				this._registrationShape.graphics.moveTo(-diameter, diameter);
 				this._registrationShape.graphics.lineTo(diameter, -diameter);
-				//this._registrationShape.graphics.drawCircle(0, 0, diameter * 2);
 				this._registrationShape.graphics.endFill();
 				super.setChildIndex(this._registrationShape, super.numChildren - 1);
 			}
@@ -240,12 +239,9 @@
 			return '[Leprechaun ' + super.name + ']';
 		}
 
-		//
-		// 
-		// IMovieClip proxies
-		// 
-		//
-
+		/**
+		 * IMovieClip proxies (Built-in)
+		 */
 		public function gotoAndStop(frame:Object, scene:String = null):void {
 			// never implement
 		}

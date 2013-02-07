@@ -33,11 +33,11 @@ package views {
 		}
 
 		override protected function finalize():void {
-			
+			trace('Contact finalised.');
 		}
 
 		override public function arrange():void {
-
+			// N/A yet.
 		}
 	}
 }
