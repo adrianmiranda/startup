@@ -10,10 +10,11 @@ package com.ad.core {
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.display.DisplayObject;
+	import flash.events.Event;
 
 	/**
-	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
-	 * TODO: 
+	 * @author Adrian C. Miranda <adriancmiranda@gmail.com>
+	 > TODO: Subsections manager
 	 */
 	use namespace nsapplication;
 	public final class Navigation extends NavigationData {
@@ -44,18 +45,23 @@ package com.ad.core {
 					//super.prepareViewLoader(view);
 					this._section = new view.caste();
 					this._section.apiKey = super.apiKey;
-					this._section.name = view.className.substr(view.className.lastIndexOf('.') + 1, view.className.length);
+					this._section.name = view.className;
 					this._section.addEventListener(TransitionEvent.TRANSITION_IN, this.onSectionTransitionIn);
 					this._section.addEventListener(TransitionEvent.TRANSITION_IN_COMPLETE, this.onSectionTransitionInComplete);
 					this._section.addEventListener(TransitionEvent.TRANSITION_OUT, this.onSectionTransitionOut);
 					this._section.addEventListener(TransitionEvent.TRANSITION_OUT_COMPLETE, this.onSectionTransitionOutComplete);
 					//this._section::attachChildView();
+					super.container.addEventListener(Event.ADDED, onSectionAdded);
 					super.container.addChild(DisplayObject(this._section));
-					this._section.transitionIn();
 				}
 			} catch(event:Error) {
 				trace('[ApplicationFacade]::stackTransition:', event.message);
 			}
+		}
+
+		private function onSectionAdded(event:Event):void {
+			super.container.removeEventListener(Event.ADDED, onSectionAdded);
+			this._section.transitionIn();
 		}
 		
 		private function onSectionTransitionIn(event:TransitionEvent):void {

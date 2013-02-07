@@ -1,9 +1,9 @@
 package com.ad.interfaces {
 	
 	/**
-	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 * @author Adrian C. Miranda <adriancmiranda@gmail.com>
 	 */
-	public interface IMovieClip extends IEventControl {
+	public interface IMovieClip extends ISprite {
 		function gotoAndStop(frame:Object, scene:String = null):void;
 		function gotoAndPlay(frame:Object, scene:String = null):void;
 		function prevFrame():void;

@@ -11,7 +11,7 @@ package com.ad.core {
 	import flash.display.DisplayObject;
 	
 	/**
-	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 * @author Adrian C. Miranda <adriancmiranda@gmail.com>
 	 */
 	use namespace nsapplication;
 	public class ApplicationRequest extends ApplicationCore {
@@ -51,6 +51,10 @@ package com.ad.core {
 		
 		public function startup(binding:DisplayObject = null):void {
 			this._binding = binding;
+			// @usage: '{@bind}string'['bind']();
+			String.prototype.bind = function():String {
+				return Binding.bind(this, this._binding);
+			}
 			if (this._request) {
 				this._request.send(this.bind(this._request.url));
 			}

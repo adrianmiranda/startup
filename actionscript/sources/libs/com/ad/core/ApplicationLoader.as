@@ -20,7 +20,9 @@ package com.ad.core {
 	import flash.system.LoaderContext;
 	
 	/**
-	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 * @author Adrian C. Miranda <adriancmiranda@gmail.com>
+	 > TODO: Usage a single method to add and remove listeners.
+	 > Create a new loaderContext to header.
 	 */
 	use namespace nsapplication;
 	public class ApplicationLoader extends ApplicationRequest {
@@ -36,6 +38,10 @@ package com.ad.core {
 		public static function getInstance(key:String = null):ApplicationLoader {
 			if (!hasInstance(key)) instances[key] = new ApplicationLoader(key);
 			return instances[key] as ApplicationLoader;
+		}
+
+		public function registerFileType(extensions:String, loaderClass:Class):void {
+			LoaderMax.registerFileType(extensions, loaderClass);
 		}
 		
 		public function loaders(...rest:Array):void {
@@ -61,6 +67,17 @@ package com.ad.core {
 			super.onRequestResult();
 			if (super.header.hasFiles) {
 				this.loadHeader(super.header);
+			} else if (super.header.views.root.hasFiles) {
+				if (super.vars.onReady) {
+					super.vars.onReady.apply(null, super.vars.onReadyParams);
+				}
+				this.prepareViewLoader(super.header.views.root);
+				this._load && this.load();
+			} else {
+				if (super.vars.onReady) {
+					super.vars.onReady.apply(null, super.vars.onReadyParams);
+				}
+				onComplete(new LoaderEvent(LoaderEvent.COMPLETE, this));
 			}
 		}
 		
@@ -237,7 +254,6 @@ package com.ad.core {
 			super.dispatchEvent(event.clone());
 		}
 		
-		// FIXME: ao invés de usar dois métodos, um pra remover outro pra adicionar, resumir pra uma usando listeners(boolean); nas chamadas
 		private function addLoaderListeners():void {
 			if (this._loader && !this._loader.hasEventListener(LoaderEvent.COMPLETE)) {
 				this._loader.addEventListener(LoaderEvent.CHILD_PROGRESS, this.onViewChildProgress);

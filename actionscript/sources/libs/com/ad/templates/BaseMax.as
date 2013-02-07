@@ -7,9 +7,10 @@ package com.ad.templates {
 	import flash.system.Capabilities;
 	
 	/**
-	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 * @author Adrian C. Miranda <adriancmiranda@gmail.com>
 	 */
 	public class BaseMax extends ViewerMax implements IBase {
+		private var _bounds:Rectangle = new Rectangle();
 		private var _margin:Rectangle = new Rectangle();
 		private var _resolution:Point = new Point();
 		private var _screen:Rectangle = new Rectangle();
@@ -32,6 +33,7 @@ package com.ad.templates {
 			super.removeEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage);
 			super.stage.addEventListener(Event.DEACTIVATE, this.onDeactivate);
 			super.stage.addEventListener(Event.ACTIVATE, this.onActivate);
+			this._bounds = super.getBounds(super);
 			this._flashVars = super.stage.loaderInfo.parameters;
 			this._resolution.x = Capabilities.screenResolutionX;
 			this._resolution.y = Capabilities.screenResolutionY;
@@ -91,28 +93,28 @@ package com.ad.templates {
 			this.rendering();
 		}
 		
-		protected function startRendering():void {
+		public function startRendering():void {
 			if (!this._rendering) {
 				this._rendering = true;
 				super.addEventListener(Event.ENTER_FRAME, this.onRenderTick, false, 0, true);
 			}
 		}
 		
-		protected function stopRendering():void {
+		public function stopRendering():void {
 			if (this._rendering) {
 				this._rendering = false;
 				super.removeEventListener(Event.ENTER_FRAME, this.onRenderTick);
 			}
 		}
 
-		protected function startArrange():void {
+		public function startArrange():void {
 			if (this._resizable && super.stage) {
 				super.stage.addEventListener(Event.RESIZE, this.onStageResize, false, 0, true);
 				this.onStageResize(new Event(Event.RESIZE));
 			}
 		}
 
-		protected function stopArrange():void {
+		public function stopArrange():void {
 			if (this._resizable && super.stage) {
 				super.stage.removeEventListener(Event.RESIZE, this.onStageResize);
 			}
@@ -144,6 +146,10 @@ package com.ad.templates {
 		
 		public function get resolution():Point {
 			return this._resolution.clone();
+		}
+
+		public function get originBounds():Rectangle {
+			return this._bounds.clone();
 		}
 		
 		public function get screen():Rectangle {

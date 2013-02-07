@@ -1,6 +1,8 @@
 #!/bin/sh
 ################################################################################
 ##
+##	Adrian C. Miranda <adriancmiranda@gmail.com>
+##	
 ##	To make build executable:
 ##	$ chmod 775 build.ad
 ##
@@ -8,24 +10,34 @@
 ##	$ cd path/to/work
 ##	$ sh build.ad r
 ##	
+##	@todo:
+##	$ Hit esc in compile error.
+##	
 ################################################################################
+#
+# app structure
+#
+bin="publish"
+src="sources"
+
 #
 # build index
 #
-as="sources/classes/Index.as"
-swf="publish/index.swf"
+as="$src/classes/Boot.as"
+swf="$bin/boot.swf"
+html="$bin/index.html"
 
 #
 # class paths
 #
-sourcespath="sources/classes/ sources/libs/"
-librarypath="sources/swc/"
+sourcespath="$src/classes/ $src/libs/"
+librarypath="$src/swc/"
 
 #
 # previews
 #
-preview0="publish/index.swf"
-preview1="publish/index.html"
+preview0=$swf
+preview1=$html
 preview2="http://localhost:8000/"
 
 #
@@ -36,7 +48,23 @@ swc="$flexpath/frameworks/libs/framework.swc $librarypath"
 mxmlc="$flexpath/bin/mxmlc"
 asdoc="$flexpath/bin/asdoc"
 flashlog='/Users/adrianmiranda/Library/Preferences/Macromedia/Flash Player/Logs/flashlog.txt'
-options="-static-link-runtime-shared-libraries=true -use-network=false -incremental=false -keep=false -debug=true -target-player=10.1"
+vars='-define CONFIG::LOGGING true -define CONFIG::FLASH_10_1 false -define CONFIG::PLATFORM true -define CONFIG::MOCK false'
+
+# 
+# shortcut cmd's
+# 
+function pause(){
+	read -p "$*"
+}
+
+# 
+# set options
+# 
+if [ "$2" = "f" ]; then # release
+	options="-static-link-runtime-shared-libraries=true -use-network=false -incremental=false -keep=false -debug=false -target-player=11.1 $vars"
+else # debug
+	options="-static-link-runtime-shared-libraries=true -use-network=false -incremental=false -keep=false -debug=true -target-player=11.1 $vars"
+fi
 
 #
 # run mxmlc
@@ -45,17 +73,27 @@ echo "### BUILDING $swf"
 $mxmlc $as -o $swf -source-path $sourcespath -library-path $swc $options
 echo "### FINISH!"
 
+# 
+# debug
+# 
+if [ "$2" = "-f" ]; then
+	tail -f "$flashlog"
+fi
+
 #
 # launch previews
 #
-if [ "$1" = "r" ]; then
-	# tail -f "$flashlog"
+if [ "$1" = "r" ]; then # run
 	open $preview0
-elif [ "$1" = "rl" ]; then
-	# tail -f "$flashlog"
+elif [ "$1" = "rl" ]; then # run local
 	open $preview1
-elif [ "$1" = "rlh" ]; then
-	cd "public"
+elif [ "$1" = "ssr" ]; then # search strings recursively in files
+	if [ "$3" ]; then
+		cd "$3"
+	fi
+	find ./ -exec grep -Hn "$2" {} \;
+elif [ "$1" = "rlh" ]; then # run localhost
+	cd "$bin"
 	open $preview2
 	python -m SimpleHTTPServer
 fi

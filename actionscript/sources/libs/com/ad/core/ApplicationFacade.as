@@ -13,7 +13,7 @@ package com.ad.core {
 	import flash.display.Stage;
 	
 	/**
-	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 * @author Adrian C. Miranda <adriancmiranda@gmail.com>
 	 */
 	use namespace nsapplication;
 	public class ApplicationFacade extends ApplicationLoader {
@@ -147,16 +147,22 @@ package com.ad.core {
 			this._navigation.setTitle(value, delimiter);
 		}
 		
-		public function setLanguage(value:*):Language {
-			return this._navigation.setLanguage(value);
+		public function setLanguage(value:* = null):Language {
+			//return this._navigation.i18n::set(value);
+			return null;
 		}
 
-		public function setView(value:*):View {
-			return this._navigation.setView(value);
+		public function setView(value:* = null):View {
+			//return this._navigation.area::set(value);
+			return null;
 		}
 		
 		public function navigateTo(value:*, query:Object = null):void {
 			this._navigation.navigateTo(value, query);
+		}
+
+		public function calculateRoute(value:* = null):Boolean {
+			return this._navigation.calculate(value);
 		}
 
 		public function reload():void {
@@ -215,8 +221,8 @@ package com.ad.core {
 			return this._navigation.languages;
 		}
 
-		public function get views():View {
-			return this._navigation.views;
+		public function get baseViews():View {
+			return this._navigation.base;
 		}
 
 		public function get pathNames():Array {

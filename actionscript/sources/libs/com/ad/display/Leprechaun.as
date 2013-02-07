@@ -3,89 +3,131 @@
 	import com.ad.utils.Cleaner;
 	
 	import flash.events.Event;
+	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.geom.Point;
 	
 	/**
-	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
+	 * @author Adrian C. Miranda <adriancmiranda@gmail.com>
+	 > FIXME: Interface hierarchy to implements.
 	 */
-	public class Leprechaun extends Nymph implements IDisplay {
+	public class Leprechaun extends Nymph implements IDisplay/*, ISprite*/ {
 		private var _registrationPoint:Point;
+		private var _registrationShape:Shape;
 		private var _locked:Boolean;
 		private var _dead:Boolean;
 		
 		public function Leprechaun() {
 			super();
 			this.moveRegistrationPoint(0, 0);
+			super.addEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage, false, 0, true);
 			super.addEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage, false, 0, true);
+		}
+
+		private function onAddedToStage(event:Event):void {
+			super.removeEventListener(Event.ADDED_TO_STAGE, this.onAddedToStage, false);
+			this.rotation = super.rotation;
+			this.scaleX = super.scaleX;
+			this.scaleY = super.scaleY;
+			this.x = super.x;
+			this.y = super.y;
 		}
 		
 		private function onRemovedFromStage(event:Event):void {
 			super.removeEventListener(Event.REMOVED_FROM_STAGE, this.onRemovedFromStage, false);
+			this.detachRegistrationPoint();
 			this._dead = true;
 		}
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
-		
 		public function moveRegistrationPoint(x:Number, y:Number):void {
 			this._registrationPoint = new Point(x, y);
+			if (this._registrationShape) {
+				this._registrationShape.x = x;
+				this._registrationShape.y = y;
+			}
 		}
 		
-		public function set parentX(value:Number):void {
-			var point:Point = super.parent.globalToLocal(super.localToGlobal(this._registrationPoint));
-			super.x = super.x + (value - point.x);
+		override public function set x(value:Number):void {
+			if (super.parent) {
+				var point:Point = super.parent.globalToLocal(super.localToGlobal(this._registrationPoint));
+				super.x = super.x + (value - point.x);
+			} else {
+				super.x = value;
+			}
 		}
 		
-		public function get parentX():Number {
-			var point:Point = super.parent.globalToLocal(super.localToGlobal(this._registrationPoint));
-			return point.x;
+		override public function get x():Number {
+			if (super.parent) {
+				var point:Point = super.parent.globalToLocal(super.localToGlobal(this._registrationPoint));
+				return point.x;
+			}
+			return super.x;
 		}
 		
-		public function set parentY(value:Number):void {
-			var point:Point = super.parent.globalToLocal(super.localToGlobal(this._registrationPoint));
-			super.y = super.y + (value - point.y);
+		override public function set y(value:Number):void {
+			if (super.parent) {
+				var point:Point = super.parent.globalToLocal(super.localToGlobal(this._registrationPoint));
+				super.y = super.y + (value - point.y);
+			} else {
+				super.y = value;
+			}
 		}
 		
-		public function get parentY():Number {
-			var point:Point = super.parent.globalToLocal(super.localToGlobal(this._registrationPoint));
-			return point.y;
+		override public function get y():Number {
+			if (super.parent) {
+				var point:Point = super.parent.globalToLocal(super.localToGlobal(this._registrationPoint));
+				return point.y;
+			}
+			return super.y;
 		}
 		
-		public function get parentMouseX():Number {
+		override public function get mouseX():Number {
 			return Math.round(super.mouseX - this._registrationPoint.x);
 		}
 		
-		public function get parentMouseY():Number {
+		override public function get mouseY():Number {
 			return Math.round(super.mouseY - this._registrationPoint.y);
 		}
 		
-		public function set parentScaleX(value:Number):void {
+		override public function set scaleX(value:Number):void {
 			this.setProperty('scaleX', value);
 		}
 		
-		public function set parentScaleY(value:Number):void {
+		override public function set scaleY(value:Number):void {
 			this.setProperty('scaleY', value);
 		}
 		
-		public function set parentRotation(value:Number):void {
+		override public function set rotation(value:Number):void {
 			this.setProperty('rotation', value);
+		}
+
+		// in test
+		override public function set rotationX(value:Number):void {
+			this.setProperty('rotationX', value);
+		}
+
+		// in test
+		override public function set rotationY(value:Number):void {
+			this.setProperty('rotationY', value);
 		}
 		
 		private function setProperty(property:String, value:Number):void {
-			var pointA:Point = super.parent.globalToLocal(super.localToGlobal(this._registrationPoint));
-			super[property] = value;
-			var pointB:Point = super.parent.globalToLocal(super.localToGlobal(this._registrationPoint));
-			super.x = super.x - (pointB.x - pointA.x);
-			super.y = super.y - (pointB.y - pointA.y);
+			if (super.parent) {
+				var pointA:Point = super.parent.globalToLocal(super.localToGlobal(this._registrationPoint));
+				super[property] = value;
+				var pointB:Point = super.parent.globalToLocal(super.localToGlobal(this._registrationPoint));
+				super.x = super.x - (pointB.x - pointA.x);
+				super.y = super.y - (pointB.y - pointA.y);
+			} else {
+				super[property] = value;
+			}
 		}
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
-		
 		public function move(x:Number, y:Number):void {
-			super.x = Math.round(x);
-			super.y = Math.round(y);
+			this.x = Math.round(x);
+			this.y = Math.round(y);
 		}
 		
 		public function size(width:Number, height:Number):void {
@@ -94,15 +136,24 @@
 		}
 		
 		public function set scale(value:Number):void {
-			super.scaleX = super.scaleY = value;
+			this.scaleX = this.scaleY = value;
 		}
 		
 		public function fit(width:Number, height:Number):void {
-			super.width = width;
-			super.scaleY = super.scaleX;
-			if (super.height < height) {
+			if (super.height < super.width) {
 				super.height = height;
-				super.scaleX = super.scaleY;
+				this.scaleX = this.scaleY;
+				if (super.width < width) {
+					super.width = width;
+					this.scaleY = this.scaleX;
+				}
+			} else {
+				super.width = width;
+				this.scaleY = this.scaleX;
+				if (super.height < height) {
+					super.height = height;
+					this.scaleX = this.scaleY;
+				}
 			}
 		}
 		
@@ -122,13 +173,7 @@
 		}
 		
 		public function set showRegistrationPoint(value:Boolean):void {
-			super.graphics.clear();
-			if (!value) return;
-			super.graphics.lineStyle(2, 0xFF0000);
-			super.graphics.moveTo(-5, -5);
-			super.graphics.lineTo(5, 5);
-			super.graphics.moveTo(-5, 5);
-			super.graphics.lineTo(5, -5);
+			value ? this.attachRegistrationPoint(5) : this.detachRegistrationPoint();
 		}
 		
 		override public function addChild(child:DisplayObject):DisplayObject {
@@ -164,9 +209,153 @@
 				this._dead = true;
 			}
 		}
+
+		private function attachRegistrationPoint(diameter:Number = 5):void {
+			this.detachRegistrationPoint();
+			this._registrationShape = this.addChild(new Shape()) as Shape;
+			if (this._registrationShape) {
+				this._registrationShape.graphics.beginFill(0xffffff, 0);
+				this._registrationShape.graphics.lineStyle(2, 0x00CCFF);
+				this._registrationShape.graphics.moveTo(-diameter, -diameter);
+				this._registrationShape.graphics.lineTo(diameter, diameter);
+				this._registrationShape.graphics.moveTo(-diameter, diameter);
+				this._registrationShape.graphics.lineTo(diameter, -diameter);
+				//this._registrationShape.graphics.drawCircle(0, 0, diameter * 2);
+				this._registrationShape.graphics.endFill();
+				super.setChildIndex(this._registrationShape, super.numChildren - 1);
+			}
+		}
+
+		private function detachRegistrationPoint():void {
+			if (this._registrationShape) {
+				this._registrationShape.graphics.clear();
+				if (this._registrationShape.parent) {
+					this._registrationShape.parent.removeChild(this._registrationShape);
+					this._registrationShape = null;
+				}
+			}
+		}
 		
 		override public function toString():String {
 			return '[Leprechaun ' + super.name + ']';
+		}
+
+		//
+		// 
+		// IMovieClip proxies
+		// 
+		//
+
+		public function gotoAndStop(frame:Object, scene:String = null):void {
+			// never implement
+		}
+
+		public function gotoAndPlay(frame:Object, scene:String = null):void {
+			// never implement
+		}
+
+		public function prevFrame():void {
+			// never implement
+		}
+		
+		public function nextFrame():void {
+			// never implement
+		}
+		
+		public function nextScene():void {
+			// never implement
+		}
+		
+		public function prevScene():void {
+			// never implement
+		}
+		
+		public function stop():void {
+			// never implement
+		}
+		
+		public function play():void {
+			// never implement
+		}
+		
+		public function playTo(frame:Object, vars:Object = null):void {
+			// never implement
+		}
+		
+		public function playToBeginAndStop(vars:Object = null):void {
+			// never implement
+		}
+		
+		public function playToEndAndStop(vars:Object = null):void {
+			// never implement
+		}
+		
+		public function loopBetween(from:Object = 1, to:Object = 0, yoyo:Boolean = false, vars:Object = null):void {
+			// never implement
+		}
+		
+		public function cancelLooping():void {
+			// never implement
+		}
+		
+		public function set onCompleteFrame(closure:Function):void {
+			// never implement
+		}
+		
+		public function set trackAsMenu(value:Boolean):void {
+			// never implement
+		}
+		
+		public function set enabled(value:Boolean):void {
+			// never implement
+		}
+		
+		public function frameIsValid(frame:Object):Boolean {
+			return !1;
+		}
+		
+		public function get trackAsMenu():Boolean {
+			return !1;
+		}
+		
+		public function get enabled():Boolean {
+			return !1;
+		}
+		
+		public function getFrameByLabel(frame:String):int {
+			return 0;
+		}
+		
+		public function parseFrame(frame:Object):int {
+			return 0;
+		}
+		
+		public function get duration():Number {
+			return 0;
+		}
+		
+		public function get position():Number {
+			return 0;
+		}
+		
+		public function get currentFrame():int {
+			return 0;
+		}
+		
+		public function get framesLoaded():int {
+			return 0;
+		}
+		
+		public function get totalFrames():int{
+			return 0;
+		}
+		
+		public function get currentLabels():Array {
+			return [];
+		}
+		
+		public function get currentLabel():String {
+			return '';
 		}
 	}
 }
