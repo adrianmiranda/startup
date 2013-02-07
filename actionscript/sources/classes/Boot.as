@@ -6,6 +6,7 @@ package {
 	import com.ad.data.*;
 	import com.ad.core.*;
 	import com.ad.net.*;
+	import com.ad.ui.*;
 	import com.greensock.loading.*;
 	import com.greensock.plugins.*;
 	import com.greensock.easing.*;
@@ -24,6 +25,7 @@ package {
 	 */
 	[SWF(width='550', height='400', frameRate='31', backgroundColor='#dddddd')]
 	public final class Boot extends SpriteBase {
+		private var _cmmenu:ContextMenuManager;
 		private var _app:Application;
 
 		public function Boot() {
@@ -31,6 +33,7 @@ package {
 		}
 
 		override protected function initialize():void {
+			_cmmenu = new ContextMenuManager(this);
 			_app = Application.getInstance();
 			_app.plugins(AutoAlphaPlugin);
 			_app.loaders(XMLLoader, SWFLoader);
@@ -65,11 +68,25 @@ package {
 		}
 
 		private function run():void {
-			_app.params('parameters')
-			.tracks('tracks')
-			.links('links')
-			.texts('texts')
-			.run('view');
+			_app.params('parameters').tracks('tracks').links('links').texts('texts').run('view');
+			_cmmenu.add(i18n('byline'), onClickByline);
+			_cmmenu.add('about', onClickAbout, true);
+			_cmmenu.add('contact', onClickContact);
+		}
+
+		private function onClickByline(event:ContextMenuEvent):void
+		{
+			Browser.gotoURL('https://github.com/adrianmiranda', '_blank');
+		}
+
+		private function onClickAbout(event:ContextMenuEvent):void
+		{
+			Browser.gotoURL('http://cargocollective.com/adrianmiranda', '_blank');
+		}
+
+		private function onClickContact(event:ContextMenuEvent):void
+		{
+			Browser.mailTo('adriancmiranda@gmail.com', 'ad::feedback');
 		}
 	}
 }

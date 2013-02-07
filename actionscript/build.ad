@@ -43,20 +43,12 @@ preview2="http://localhost:8000/"
 #
 # support
 #
-flexpath="/Users/pivot/Addons/SDKs/flex_sdk_4"
-# flexpath="/Users/adrianmiranda/addons/SDKs/flex_sdk_4.6.0"
+flexpath="/Users/adrianmiranda/addons/SDKs/flex_sdk_4.6.0"
 swc="$flexpath/frameworks/libs/framework.swc $librarypath"
 mxmlc="$flexpath/bin/mxmlc"
 asdoc="$flexpath/bin/asdoc"
 flashlog='/Users/adrianmiranda/Library/Preferences/Macromedia/Flash Player/Logs/flashlog.txt'
 vars='-define CONFIG::LOGGING true -define CONFIG::FLASH_10_1 false -define CONFIG::PLATFORM true -define CONFIG::MOCK false'
-
-# 
-# shortcut cmd's
-# 
-function pause(){
-	read -p "$*"
-}
 
 # 
 # set options
