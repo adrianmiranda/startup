@@ -4,12 +4,13 @@
 	window.SWF = (function() {
 
 		var flashvars = {
-			  fvBaseContent: '' // path assets as xml, swf
+			  debug: swfobject.getQueryParamValue('debug')
+			, fvBaseContent: '' // path assets as xml, swf
 			, fvBaseService: '' // path services
 		};
 
 		var settings = {
-			  express: flashvars.fvBaseContent+'noflash/support/expressInstall.swf'
+			  express: flashvars.fvBaseContent+'noflash/expressInstall.swf'
 			, swf: flashvars.fvBaseContent+'boot.swf'
 			, version: '10.0.000'
 			, div: 'flash'
@@ -44,16 +45,17 @@
 		};
 
 		SWF.embed = function() {
+			var ck = new Date();
 			swfobject.createCSS('html', 'width:'+settings.width+';height:'+settings.height+';margin:0;padding:0;overflow:hidden;');
 			swfobject.createCSS('body', 'width:'+settings.width+';height:'+settings.height+';margin:0;padding:0;overflow:hidden;');
 			swfobject.createCSS('#'+settings.div, 'width:'+settings.width+';height:'+settings.height+';margin:0;');
 			swfobject.embedSWF(
-				  settings.swf
+				  settings.swf+'?ck='+ck.getTime()
 				, settings.div
 				, settings.width
 				, settings.height
 				, settings.version
-				, settings.express
+				, settings.express+'?ck='+ck.getTime()
 				, flashvars
 				, parameters
 				, attributes
