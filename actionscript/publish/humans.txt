@@ -1,18 +1,6 @@
 /* TEAM */
-	Flash Dev:		Adrian Miranda, Thalles Freitas
+	Flash Dev:		Adrian Miranda
 	Site:			http://cargocollective.com/adrianmiranda
-	Site:			http://thalles.net
 	Contact:		adriancmiranda [at] gmail.com
-	Contact:		thallesfreitas [at] yahoo.com.br
 	Twitter:		@adriancmiranda
-	Twitter:		@thalles__
 	Location:		São Paulo, São Paulo, Brazil
-
-/* SITE */
-	First update:	2013/01/31
-	Last update:	2013/02/02
-	Language:		Portuguese
-	Doctype:		HTML5
-	Software:		Sublime Text, Photoshop, Fireworks
-	Standards:		AS3, HTML5, CSS3
-	Components:		Modernizr, SWFObject, SWFAddress, SWFFit
