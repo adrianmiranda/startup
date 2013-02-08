@@ -36,9 +36,19 @@
 		};
 
 		SWF.prototype.attach = function(movie, params) {
+			_params = (params || _params);
+			_movie = (movie || _movie);
+			swfobject.addDomLoadEvent(embed);
+		};
+
+		SWF.prototype.detach = function(id) {
+			swfobject.removeSWF(id);
+		};
+
+		function embed(movie, params) {
 			movie = (movie || _movie || 'boot.swf');
 			params = (params || _params || {});
-
+			
 			if (_scope.available()) {
 				var ck = new Date();
 
@@ -68,11 +78,8 @@
 					  id: settings.div
 					, name: settings.div
 				};
-
-				swfobject.createCSS('html', 'width:'+settings.width+';height:'+settings.height+';margin:0;padding:0;overflow:hidden;');
-				swfobject.createCSS('body', 'width:'+settings.width+';height:'+settings.height+';margin:0;padding:0;overflow:hidden;');
 				swfobject.createCSS('#app', 'width:'+settings.width+';height:'+settings.height+';position:relative;margin:0 auto;');
-				swfobject.createCSS('#'+settings.div, 'width:'+settings.width+';height:'+settings.height+';margin:0;');
+				swfobject.createCSS('#'+settings.div, 'width:100%;height:100%;margin:0;position:absolute;');
 				swfobject.embedSWF(
 					  settings.swf+'?ck='+ck.getTime()
 					, settings.div
@@ -89,15 +96,10 @@
 					swffit.fit(attributes.id, params.fitX || 980, params.fitY || 550);
 				}
 
-				swfobject.addDomLoadEvent(this);
 				return true;
 			}
 			return false;
-		};
-
-		SWF.prototype.detach = function(id) {
-			swfobject.removeSWF(id);
-		};
+		}
 
 		return new SWF().attach();
 	})();
