@@ -6,20 +6,18 @@
 	--------------------------------------------------------------------------*/
 	
 	window.SWF = (function() {
-		// private vars
 		var _scope;
 		var _params;
 		var _movie;
-
-		// constructor
+		
 		function SWF(movie, params) {
 			_scope = this;
 			_params = params;
 			_movie = movie;
 		}
 
-		SWF.prototype.available = function() {
-			return _scope.has || swfobject.hasFlashPlayerVersion('6.0.65');
+		SWF.prototype.available = function(version) {
+			return _scope.has || swfobject.hasFlashPlayerVersion(version || '6.0.65');
 		};
 
 		SWF.prototype.get = function (movieName) {
@@ -49,7 +47,7 @@
 			movie = (movie || _movie || 'boot.swf');
 			params = (params || _params || {});
 			
-			if (_scope.available()) {
+			if (_scope.available(params.version)) {
 				var ck = new Date();
 
 				var flashvars = {
@@ -78,8 +76,7 @@
 					  id: settings.div
 					, name: settings.div
 				};
-				swfobject.createCSS('#app', 'width:'+settings.width+';height:'+settings.height+';position:relative;margin:0 auto;');
-				swfobject.createCSS('#'+settings.div, 'width:100%;height:100%;margin:0;position:absolute;');
+				swfobject.createCSS('#'+settings.div, 'width:'+settings.width+';height:'+settings.height+';margin:0;padding:0;position:absolute;');
 				swfobject.embedSWF(
 					  settings.swf+'?ck='+ck.getTime()
 					, settings.div
