@@ -3,34 +3,12 @@
 
 	window.SWF = (function() {
 
-		var flashvars = {
-			  debug: swfobject.getQueryParamValue('debug')
-			, fvBaseContent: '' // path assets as xml, swf
-			, fvBaseService: '' // path services
+		SWF.available = function() {
+			var playerVersion = swfobject.getFlashPlayerVersion();
+			return playerVersion.major || swfobject.hasFlashPlayerVersion('6.0.65');
 		};
 
-		var settings = {
-			  express: flashvars.fvBaseContent+'noflash/expressInstall.swf'
-			, swf: flashvars.fvBaseContent+'boot.swf'
-			, version: '10.0.000'
-			, div: 'flash'
-			, width: '100%'
-			, height: '100%'
-		};
-
-		var parameters = {
-			  allowscriptaccess: 'always'
-			, allowFullScreen: 'true'
-			, allownetworking: 'all'
-			, wmode: 'transparent'
-		};
-
-		var attributes = {
-			  id: settings.div
-			, name: settings.div
-		};
-
-		SWF.getSWF = function (movieName) {
+		SWF.get = function (movieName) {
 			if (navigator.appName.indexOf('Microsoft') > -1) {
 				return window[movieName];
 			} else {
@@ -38,16 +16,47 @@
 			}
 		};
 
-		SWF.hasSWF = function () {
+		SWF.has = function () {
 			var playerVersion = swfobject.getFlashPlayerVersion();
 			var majorVersion = playerVersion.major;
 			return majorVersion != 0;
 		};
 
-		SWF.embed = function() {
+		SWF.embed = function(swf, params) {
+			params = params || {};
+
 			var ck = new Date();
+
+			var flashvars = {
+				  debug: swfobject.getQueryParamValue('debug')
+				, fvBaseContent: '' // path assets as xml, swf
+				, fvBaseService: '' // path services
+			};
+
+			var settings = {
+				  express: flashvars.fvBaseContent+'noflash/expressInstall.swf'
+				, swf: flashvars.fvBaseContent+(params.swf || 'boot.swf')
+				, version: params.version || '10.1.000'
+				, div: params.div || 'flash'
+				, width: params.width || '100%'
+				, height: params.height || '100%'
+			};
+
+			var parameters = {
+				  allowscriptaccess: 'always'
+				, allowFullScreen: 'true'
+				, allownetworking: 'all'
+				, wmode: 'transparent'
+			};
+
+			var attributes = {
+				  id: settings.div
+				, name: settings.div
+			};
+
 			swfobject.createCSS('html', 'width:'+settings.width+';height:'+settings.height+';margin:0;padding:0;overflow:hidden;');
 			swfobject.createCSS('body', 'width:'+settings.width+';height:'+settings.height+';margin:0;padding:0;overflow:hidden;');
+			swfobject.createCSS('.wrapper', 'width:'+settings.width+';height:'+settings.height+';position:relative;margin:0 auto;');
 			swfobject.createCSS('#'+settings.div, 'width:'+settings.width+';height:'+settings.height+';margin:0;');
 			swfobject.embedSWF(
 				  settings.swf+'?ck='+ck.getTime()
@@ -62,15 +71,15 @@
 			);
 			
 			if (swffit) {
-				swffit.fit(attributes.id, 800, 600);
+				swffit.fit(attributes.id, params.fitX || 980, params.fitY || 550);
 			}
 		};
 
 		function SWF() {
-			if (swfobject.hasFlashPlayerVersion('6.0.65')) {
+			if (SWF.available()) {
 				swfobject.addDomLoadEvent(SWF.embed);
-			} else if (!swfobject.hasFlashPlayerVersion('6.0.65')) {
-				window.location = 'noflash/getFlash.html';
+			} else {
+				window.location = 'noflash/index.html';
 			}
 		}
 
