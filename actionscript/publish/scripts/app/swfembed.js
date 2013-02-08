@@ -10,9 +10,8 @@
 		SWF.prototype.get = function (movieName) {
 			if (navigator.appName.indexOf('Microsoft') > -1) {
 				return window[movieName];
-			} else {
-				return document[movieName];
 			}
+			return document[movieName];
 		};
 
 		SWF.prototype.has = function () {
