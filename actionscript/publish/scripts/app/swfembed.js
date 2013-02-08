@@ -35,7 +35,7 @@
 
 			var settings = {
 				  express: flashvars.fvBaseContent+'noflash/support/expressInstall.swf'
-				, swf: flashvars.fvBaseContent+(params.swf || 'boot.swf')
+				, swf: flashvars.fvBaseContent+(swf || 'boot.swf')
 				, version: params.version || '10.1.000'
 				, div: params.div || 'flash'
 				, width: params.width || '100%'
