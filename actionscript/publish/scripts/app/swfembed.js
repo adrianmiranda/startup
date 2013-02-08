@@ -37,11 +37,20 @@
 			_params = (params || _params);
 			_movie = (movie || _movie);
 			swfobject.addDomLoadEvent(embed);
+			return _scope;
 		};
 
 		SWF.prototype.detach = function(id) {
 			swfobject.removeSWF(id);
+			return _scope;
 		};
+
+		SWF.prototype.fit = function(id, width, height) {
+			if (swffit) {
+				swffit.fit(id || 'swf', width || 980, height || 550);
+			}
+			return _scope;
+		}
 
 		function embed(movie, params) {
 			movie = (movie || _movie || 'boot.swf');
@@ -88,17 +97,11 @@
 					, parameters
 					, attributes
 				);
-				
-				if (swffit) {
-					swffit.fit(attributes.id, params.fitX || 980, params.fitY || 550);
-				}
-
-				return true;
 			}
-			return false;
+			return _scope;
 		}
 
-		return new SWF().attach();
+		return new SWF().attach().fit();
 	})();
 
 }(this, document));
