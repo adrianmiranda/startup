@@ -17,7 +17,7 @@
 		}
 
 		SWF.prototype.available = function(version) {
-			return _scope.has || swfobject.hasFlashPlayerVersion(version || '6.0.65');
+			return _scope.has || swfobject.hasFlashPlayerVersion(version || '10.1.00');
 		};
 
 		SWF.prototype.get = function (movieName) {
