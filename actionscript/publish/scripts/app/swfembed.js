@@ -76,7 +76,7 @@
 					  id: settings.div
 					, name: settings.div
 				};
-				swfobject.createCSS('#'+settings.div, 'width:'+settings.width+';height:'+settings.height+';margin:0;padding:0;position:absolute;');
+				swfobject.createCSS('#'+settings.div, 'width:'+settings.width+';height:'+settings.height+';');
 				swfobject.embedSWF(
 					  settings.swf+'?ck='+ck.getTime()
 					, settings.div
