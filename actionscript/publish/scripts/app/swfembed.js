@@ -3,12 +3,11 @@
 
 	window.SWF = (function() {
 
-		SWF.available = function() {
-			var playerVersion = swfobject.getFlashPlayerVersion();
-			return playerVersion.major || swfobject.hasFlashPlayerVersion('6.0.65');
+		SWF.prototype.available = function() {
+			return this.has || swfobject.hasFlashPlayerVersion('6.0.65');
 		};
 
-		SWF.get = function (movieName) {
+		SWF.prototype.get = function (movieName) {
 			if (navigator.appName.indexOf('Microsoft') > -1) {
 				return window[movieName];
 			} else {
@@ -16,13 +15,13 @@
 			}
 		};
 
-		SWF.has = function () {
+		SWF.prototype.has = function () {
 			var playerVersion = swfobject.getFlashPlayerVersion();
 			var majorVersion = playerVersion.major;
 			return majorVersion != 0;
 		};
 
-		SWF.embed = function(swf, params) {
+		SWF.prototype.embed = function(swf, params) {
 			params = params || {};
 
 			var ck = new Date();
@@ -35,8 +34,8 @@
 
 			var settings = {
 				  express: flashvars.fvBaseContent+'noflash/support/expressInstall.swf'
-				, swf: flashvars.fvBaseContent+(swf || 'boot.swf')
-				, version: params.version || '10.1.000'
+				, swf: flashvars.fvBaseContent+(params.swf || 'boot.swf')
+				, version: params.version || '10.1.00'
 				, div: params.div || 'flash'
 				, width: params.width || '100%'
 				, height: params.height || '100%'
@@ -76,8 +75,8 @@
 		};
 
 		function SWF() {
-			if (SWF.available()) {
-				swfobject.addDomLoadEvent(SWF.embed);
+			if (this.available()) {
+				swfobject.addDomLoadEvent(this.embed);
 			} else {
 				window.location = 'noflash/index.html';
 			}
