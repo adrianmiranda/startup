@@ -1,4 +1,5 @@
 package com.ad.core {
+	import com.ad.data.File;
 	import com.ad.data.View;
 	import com.ad.data.Header;
 	import com.ad.data.Language;
@@ -12,12 +13,29 @@ package com.ad.core {
 	
 	/**
 	 * @author Adrian C. Miranda <adriancmiranda@gmail.com>
+	 * @xml
+	 *	<header history="yes" strict="yes" connections="2" flow="normal" title="Some title">
+	 *		<file id="layers" url="{@baseContent}content/settings/layers.xml" kb="4"/>
+	 *		<base id="base" class="project.Base" standard="main" mistake="main">
+	 *			<file id="base" url="{@baseContent}content/views/base.swf" kb="108"/>
+	 *			<view id="main" class="project.areas.Main"></view>
+	 *		</base>
+	 *	</header>
+	 *	
+	 * -----
+	 * @usage
+	 * import com.ad.core.ApplicationRequest;
+	 * var app:ApplicationRequest = new ApplicationRequest('projectNameOrNothing');
+	 * app.fromXML('content/settings/sitemap.xml');
+	 * app.onParsed = onSitemapParsed;
+	 * app.startup(this);
 	 */
 	use namespace nsapplication;
 	public class ApplicationRequest extends ApplicationCore {
 		private var _binding:DisplayObject;
 		private var _request:Request;
 		private var _header:Header;
+		private var _base:ISection;
 		private var _xml:XML;
 		
 		public function ApplicationRequest(key:String = null) {
@@ -99,13 +117,25 @@ package com.ad.core {
 			return this._request ? this._request.rawData != null : false;
 		}
 		
-		public function get base():DisplayObject {
-			var base:ISection;
-			if (this.header) {
-				base = new this.header.views.root.caste();
-				base.apiKey = super.apiKey;
+		public function get base():ISection {
+			if (this.header && !_base) {
+				_base = new this.header.views.root.caste();
+				_base.name = this.header.views.root.className;
+				_base.apiKey = super.apiKey;
 			}
-			return DisplayObject(base);
+			return _base;
+		}
+
+		public function getLanguage(id:* = ''):Language {
+			return this.header ? this.header.languages.getLanguage(id) : null;
+		}
+
+		public function getView(id:* = ''):View {
+			return this.header ? this.header.views.getView(id) : null;
+		}
+
+		public function getFile(id:* = 0):File {
+			return this.header ? this.header.views.getFile(id) : null;
 		}
 		
 		public function get binding():DisplayObject {
@@ -128,6 +158,7 @@ package com.ad.core {
 		}
 		
 		override public function dispose(flush:Boolean = false):void {
+			this._base = null;
 			if (this._request) {
 				this._request.close(true);
 				this._request = null;

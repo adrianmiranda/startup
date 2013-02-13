@@ -1,4 +1,4 @@
-package com.ad.display {
+﻿package com.ad.display {
 	import com.ad.interfaces.IDisplay;
 	import com.ad.utils.Cleaner;
 	
@@ -239,9 +239,12 @@ package com.ad.display {
 			return '[Leprechaun ' + super.name + ']';
 		}
 
-		/**
-		 * IMovieClip proxies (Built-in)
-		 */
+		//
+		// 
+		// IMovieClip proxies
+		// 
+		//
+
 		public function gotoAndStop(frame:Object, scene:String = null):void {
 			// never implement
 		}
