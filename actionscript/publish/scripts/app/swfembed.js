@@ -47,7 +47,7 @@
 
 		SWF.prototype.fit = function(id, width, height) {
 			if (swffit) {
-				swffit.fit(id || 'swf', width || 980, height || 550);
+				swffit.fit(id || 'swf', width || 980, height || 580);
 			}
 			return _scope;
 		}
@@ -61,31 +61,41 @@
 
 				var flashvars = {
 					  debug: swfobject.getQueryParamValue('debug')
-					, fvBaseContent: '' // path assets as xml, swf
-					, fvBaseService: '' // path services
+					, baseContent: '' // path assets as xml, swf..
+					, baseService: '' // path services
 				};
-
+				
 				var settings = {
-					  express: flashvars.fvBaseContent+'noflash/support/expressInstall.swf'
-					, swf: flashvars.fvBaseContent+movie
+					  express: flashvars.baseContent+'noflash/support/expressInstall.swf'
+					, swf: flashvars.baseContent+movie
 					, version: params.version || '10.1.00'
 					, div: params.div || 'swf'
 					, width: params.width || '100%'
 					, height: params.height || '100%'
+					, styles: params.styles || ''
 				};
 
 				var parameters = {
-					  allowscriptaccess: 'always'
-					, allowFullScreen: 'true'
-					, allownetworking: 'all'
-					, wmode: 'transparent'
+					  allowScriptAccess: params.allowScriptAccess || 'always'
+					, allowFullScreen: params.allowFullScreen || 'true'
+					, allowNetworking: params.allowNetworking || 'all'
+					, wmode: params.wmode || 'transparent'
 				};
 
 				var attributes = {
 					  id: settings.div
 					, name: settings.div
 				};
-				swfobject.createCSS('#'+settings.div, 'width:'+settings.width+';height:'+settings.height+';');
+				
+				if (params.width || params.height)
+				{
+					// TODO: Dinamizar o parent da div do swf.
+					var marginLeft = -(parseFloat(settings.width.split('px').join(''), 10) / 2);
+					var marginTop = -(parseFloat(settings.height.split('px').join(''), 10) / 2);
+					swfobject.createCSS('#app', 'width:'+settings.width+';height:'+settings.height+';margin-left:'+marginLeft+'px;margin-top:'+marginTop+'px;position:absolute;left:50%;top:50%');
+				}
+				
+				swfobject.createCSS('#'+settings.div, 'width:'+settings.width+';height:'+settings.height+';'+settings.styles);
 				swfobject.embedSWF(
 					  settings.swf+'?ck='+ck.getTime()
 					, settings.div
