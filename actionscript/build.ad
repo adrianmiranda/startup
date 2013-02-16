@@ -3,6 +3,9 @@
 ##
 ##	Adrian C. Miranda <adriancmiranda@gmail.com>
 ##	
+##	References:
+##	http://help.adobe.com/en_US/air/build/WS901d38e593cd1bac1e63e3d128cdca935b-8000.html
+##	
 ##	To make build executable:
 ##	$ chmod 775 build.ad
 ##
@@ -20,18 +23,23 @@
 #
 #
 ################################################################################
+# 
+# info
+# 
+appname="boot"
+version="0"
+
 #
-# app structure
+# structure
 #
-app="boot"
 bin="publish"
 src="sources"
 
 #
 # build index
 #
-as="$src/classes/$app.as"
-swf="$bin/$app.swf"
+as="$src/classes/$appname.as"
+swf="$bin/$appname.swf"
 html="$bin/index.html"
 
 #
@@ -106,16 +114,35 @@ if [ "$1" != "help" ] && [ "$1" != "l" ] && [ "$1" != "ll" ] && [ "$1" != "llh" 
 	startTime=`eval date +%s`
 	$mxmlc $as -o $swf -source-path $sourcespath -library-path $swc $options
 	endTime=`eval date +%s`
+
 	# 
 	# run adt
 	# 
 	if [ "$1" = "air" ]; then
-		# remove recursively all previous
-		rm -Rf *.air
-		# compile air
 		echo "\n:: Building $swf in $bin \n"
+		
+		# revision
+		revision=`cat revision`
+		echo "REVISION $revision"
+		echo $((revision+1)) > revision
+		
+		# update xml config
+		sed "s/$version/$revision/g" $appname.xml > $appname-app.xml
+		
+		# remove previous versions
+		rm -Rf *.air *.dmg *.ipa
+
+		# create certificate
+		# 
+
+		# compile air
 		$airsdk/bin/adt -version
+		# N/A yet.
+		if [ "$2" = "r" ]; then
+			open $appname.air
+		fi
 	fi
+
 	let PTIME=($endTime - $startTime)
 	echo "\n:: Decommisioning Previous Compile in $PTIME secs"
 fi

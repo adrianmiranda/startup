@@ -1,0 +1,22 @@
+<?xml version="1.10" encoding="utf-8"?>
+<application xmlns="http://ns.adobe.com/air/application/3.6">
+	<id>com.ad.boot</id>
+	<versionNumber>1.APP_VERSION</versionNumber>
+	<filename>boot</filename>
+	<name>Boot</name>
+	<initialWindow>
+		<content>boot.swf</content>
+		<systemChrome>standard</systemChrome>
+		<transparent>false</transparent>
+		<visible>true</visible>
+		<fullScreen>true</fullScreen>
+		<aspectRatio>landscape</aspectRatio>
+		<renderMode>cpu</renderMode>
+		<autoOrients>false</autoOrients>
+	</initialWindow>
+	<icon></icon>
+	<iPhone>
+		<InfoAdditions><![CDATA[<key>UIDeviceFamily</key><array><string>1</string></array>]]></InfoAdditions>
+		<requestedDisplayResolution>high</requestedDisplayResolution>
+	</iPhone>
+</application>
