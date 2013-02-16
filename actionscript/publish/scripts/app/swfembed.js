@@ -8,7 +8,7 @@
 	window.SWF = (function() {
 		var _scope;
 		var _params;
-		var _movie;
+		var _movie; 
 		
 		function SWF(movie, params) {
 			_scope = this;
@@ -89,13 +89,22 @@
 				
 				if (params.width || params.height)
 				{
-					// TODO: Dinamizar o parent da div do swf.
-					var marginLeft = -(parseFloat(settings.width.split('px').join(''), 10) / 2);
-					var marginTop = -(parseFloat(settings.height.split('px').join(''), 10) / 2);
-					swfobject.createCSS('#app', 'width:'+settings.width+';height:'+settings.height+';margin-left:'+marginLeft+'px;margin-top:'+marginTop+'px;position:absolute;left:50%;top:50%');
+					// TODO: Dinamizar o parent da div do swf e corrigir para outras medidas que não pixels.
+					var halfWidth = -(parseFloat(settings.width.split('px').join(''), 10) / 2);
+					var halfHeight = -(parseFloat(settings.height.split('px').join(''), 10) / 2);
+					var container = document.getElementById('app')
+					container.style.width = settings.width
+					container.style.height = settings.height
+					container.style.marginLeft = halfWidth +'px';
+					container.style.marginTop = halfHeight+'px';
+					container.style.position = 'absolute';
+					container.style.left = '50%';
+					container.style.top = '50%';
 				}
-				
-				swfobject.createCSS('#'+settings.div, 'width:'+settings.width+';height:'+settings.height+';'+settings.styles);
+
+				var settingsDiv = document.getElementById(settings.div);
+				settingsDiv.style.width = settings.width;
+				settingsDiv.style.height = settings.height;
 				swfobject.embedSWF(
 					  settings.swf+'?ck='+ck.getTime()
 					, settings.div
@@ -110,8 +119,7 @@
 			}
 			return _scope;
 		}
-
+		
 		return new SWF().attach().fit();
 	})();
-
 }(this, document));

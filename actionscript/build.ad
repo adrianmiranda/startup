@@ -101,8 +101,11 @@ fi
 #
 if [ "$1" != "help" ] && [ "$1" != "l" ] && [ "$1" != "ll" ] && [ "$1" != "llh" ]; then
 	echo ":: Building $swf in $bin \n"
+	startTime=`eval date +%s`
 	$mxmlc $as -o $swf -source-path $sourcespath -library-path $swc $options
-	echo "\n:: Decommisioning Previous Compile"
+	endTime=`eval date +%s`
+	let PTIME=($endTime - $startTime)
+	echo "\n:: Decommisioning Previous SWF Compile in $PTIME secs"
 fi
 
 #
