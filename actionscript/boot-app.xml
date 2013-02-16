@@ -1,22 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <application xmlns="http://ns.adobe.com/air/application/3.6">
+	<supportedProfiles>desktop extendedDesktop mobileDevice tv extendedTV</supportedProfiles>
 	<id>com.ad.boot</id>
-	<versionNumber>1.18</versionNumber>
+	<versionNumber>1.20</versionNumber>
+	<versionLabel>1.20</versionLabel>
 	<filename>boot</filename>
 	<name>Boot</name>
+	<description>Boot - Sample</description>
+	<copyright>Adrian Miranda</copyright>
+	<customUpdateUI>false</customUpdateUI>
+	<allowBrowserInvocation>false</allowBrowserInvocation>
 	<initialWindow>
-		<content>boot.swf</content>
+		<content>publish/boot.swf</content>
 		<systemChrome>standard</systemChrome>
 		<transparent>false</transparent>
 		<visible>true</visible>
 		<fullScreen>true</fullScreen>
+		<maximizable>true</maximizable>
+		<minimizable>true</minimizable>
+		<resizable>true</resizable>
 		<aspectRatio>landscape</aspectRatio>
-		<renderMode>cpu</renderMode>
+		<renderMode>auto</renderMode>
 		<autoOrients>false</autoOrients>
 	</initialWindow>
 	<icon></icon>
-	<iPhone>
-		<InfoAdditions><![CDATA[<key>UIDeviceFamily</key><array><string>1</string></array>]]></InfoAdditions>
-		<requestedDisplayResolution>high</requestedDisplayResolution>
-	</iPhone>
 </application>

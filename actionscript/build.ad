@@ -39,6 +39,7 @@ src="sources"
 #
 as="$src/classes/$appname.as"
 swf="$bin/$appname.swf"
+air="$bin/$appname.air"
 html="$bin/index.html"
 
 #
@@ -58,7 +59,7 @@ preview2="http://localhost:8000/"
 # support
 #
 targetplayer=11.1
-flashlog='/Users/adrianmiranda/Library/Preferences/Macromedia/Flash Player/Logs/flashlog.txt'
+flashlog="/Users/adrianmiranda/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt"
 flexsdk="/Users/adrianmiranda/addons/SDKs/flex_sdk_4.6.0"
 airsdk="/Users/adrianmiranda/addons/SDKs/air_sdk_3.6.0"
 swc="$flexsdk/frameworks/libs/framework.swc $librarypath"
@@ -125,24 +126,23 @@ if [ "$1" != "help" ] && [ "$1" != "l" ] && [ "$1" != "ll" ] && [ "$1" != "llh" 
 		revision=`cat revision`
 		echo "REVISION $revision"
 		echo $((revision+1)) > revision
-
+		
 		# update xml config
 		sed "s/$version/$revision/g" $appname.xml > $appname-app.xml
 		
 		# remove previous versions
 		rm -Rf *.air *.dmg *.ipa
-
+		
 		# uinstall previous version
 		# 
-
+		
 		# create certificate
 		# 
-
+		
 		# compile air
 		$airsdk/bin/adt -version
-		$airsdk/bin/adt -package -storetype pkcs12 -keystore certificate.p12 -storepass "$appname" 
-		$appname.air $appname-app.xml $appname.swf
-
+		$airsdk/bin/adt -package -storetype pkcs12 -keystore certificate.p12 -storepass "$appname" $air $appname-app.xml $swf
+		
 		if [ "$3" = "r" ]; then
 			open $appname.air
 		fi
@@ -196,5 +196,6 @@ elif [ "$1" = "help" ] || [ "$1" = "h" ]; then # help user
 	echo "   rl\tRun local"
 	echo "   rlh\tRun localhost"
 	echo "   ssr\tSearch strings recursively in files"
+	echo "   air\tGenerate Air file"
 	echo "-"
 fi
