@@ -23,14 +23,15 @@
 #
 # app structure
 #
+app="boot"
 bin="publish"
 src="sources"
 
 #
 # build index
 #
-as="$src/classes/Boot.as"
-swf="$bin/boot.swf"
+as="$src/classes/$app.as"
+swf="$bin/$app.swf"
 html="$bin/index.html"
 
 #
@@ -51,10 +52,11 @@ preview2="http://localhost:8000/"
 #
 targetplayer=11.1
 flashlog='/Users/adrianmiranda/Library/Preferences/Macromedia/Flash Player/Logs/flashlog.txt'
-flexpath="/Users/adrianmiranda/addons/SDKs/flex_sdk_4.6.0"
-swc="$flexpath/frameworks/libs/framework.swc $librarypath"
-mxmlc="$flexpath/bin/mxmlc"
-asdoc="$flexpath/bin/asdoc"
+flexsdk="/Users/adrianmiranda/addons/SDKs/flex_sdk_4.6.0"
+airsdk="/Users/adrianmiranda/addons/SDKs/air_sdk_3.6.0"
+swc="$flexsdk/frameworks/libs/framework.swc $librarypath"
+mxmlc="$flexsdk/bin/mxmlc"
+asdoc="$flexsdk/bin/asdoc"
 vars='-define CONFIG::LOGGING true -define CONFIG::PLATFORM true -define CONFIG::MOCK false'
 
 ################################################################################
@@ -67,7 +69,7 @@ vars='-define CONFIG::LOGGING true -define CONFIG::PLATFORM true -define CONFIG:
 #
 # utils
 #
-function float_cond() {
+function float_condition() {
 	local cond=0
 	if [[ $# -gt 0 ]]; then
 		cond=$(echo "$*" | bc -q 2>/dev/null)
@@ -81,7 +83,7 @@ function float_cond() {
 #
 # define target player
 #
-if float_cond ''$targetplayer' > 10.1'; then
+if float_condition ''$targetplayer' > 10.1'; then
 	vars="-target-player=$targetplayer $vars -define CONFIG::FLASH_10_1 false"
 else
 	vars="-target-player=$targetplayer $vars -define CONFIG::FLASH_10_1 true"
@@ -104,8 +106,18 @@ if [ "$1" != "help" ] && [ "$1" != "l" ] && [ "$1" != "ll" ] && [ "$1" != "llh" 
 	startTime=`eval date +%s`
 	$mxmlc $as -o $swf -source-path $sourcespath -library-path $swc $options
 	endTime=`eval date +%s`
+	# 
+	# run adt
+	# 
+	if [ "$1" = "air" ]; then
+		# remove recursively all previous
+		rm -Rf *.air
+		# compile air
+		echo "\n:: Building $swf in $bin \n"
+		$airsdk/bin/adt -version
+	fi
 	let PTIME=($endTime - $startTime)
-	echo "\n:: Decommisioning Previous SWF Compile in $PTIME secs"
+	echo "\n:: Decommisioning Previous Compile in $PTIME secs"
 fi
 
 #
