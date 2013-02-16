@@ -137,7 +137,10 @@ if [ "$1" != "help" ] && [ "$1" != "l" ] && [ "$1" != "ll" ] && [ "$1" != "llh" 
 
 		# compile air
 		$airsdk/bin/adt -version
-		# N/A yet.
+		# $airsdk/bin/adt N/A yet.
+		$airsdk/bin/adt -package -storetype pkcs12 -keystore certificate.p12 
+		$appname.air $appname-app.xml $appname.swf
+
 		if [ "$2" = "r" ]; then
 			open $appname.air
 		fi
