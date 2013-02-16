@@ -27,7 +27,6 @@
 # info
 # 
 appname="boot"
-version="0"
 
 #
 # structure
@@ -122,32 +121,36 @@ if [ "$1" != "help" ] && [ "$1" != "l" ] && [ "$1" != "ll" ] && [ "$1" != "llh" 
 		echo "\n:: Building $swf in $bin \n"
 		
 		# revision
+		version='APP_VERSION'
 		revision=`cat revision`
 		echo "REVISION $revision"
 		echo $((revision+1)) > revision
-		
+
 		# update xml config
 		sed "s/$version/$revision/g" $appname.xml > $appname-app.xml
 		
 		# remove previous versions
 		rm -Rf *.air *.dmg *.ipa
 
+		# uinstall previous version
+		# 
+
 		# create certificate
 		# 
 
 		# compile air
 		$airsdk/bin/adt -version
-		# $airsdk/bin/adt N/A yet.
-		$airsdk/bin/adt -package -storetype pkcs12 -keystore certificate.p12 
+		$airsdk/bin/adt -package -storetype pkcs12 -keystore certificate.p12 -storepass "$appname" 
 		$appname.air $appname-app.xml $appname.swf
 
-		if [ "$2" = "r" ]; then
+		if [ "$3" = "r" ]; then
 			open $appname.air
 		fi
 	fi
 
 	let PTIME=($endTime - $startTime)
-	echo "\n:: Decommisioning Previous Compile in $PTIME secs"
+	echo "\n:: Decommisioning Previous Compile"
+	echo ":: Built in $PTIME seconds"
 fi
 
 #
