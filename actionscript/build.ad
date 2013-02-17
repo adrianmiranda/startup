@@ -135,13 +135,16 @@ if [ "$1" != "help" ] && [ "$1" != "l" ] && [ "$1" != "ll" ] && [ "$1" != "llh" 
 		
 		# uinstall previous version
 		# 
+
+		# dependencies
+		directories="$bin/content"
 		
 		# create certificate
-		# 
+		$airsdk/bin/adt -certificate -cn AM -ou AM -o AM -c BR -validityPeriod 2 1024-RSA certificate.p12 "$appname"
 		
 		# compile air
 		$airsdk/bin/adt -version
-		$airsdk/bin/adt -package -storetype pkcs12 -keystore certificate.p12 -storepass "$appname" $air $appname-app.xml $swf
+		$airsdk/bin/adt -package -storetype pkcs12 -keystore certificate.p12 -storepass "$appname" $air $appname-app.xml $swf $directories
 		
 		if [ "$3" = "r" ]; then
 			open $appname.air
