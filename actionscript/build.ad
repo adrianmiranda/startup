@@ -62,6 +62,7 @@ targetplayer=11.1
 flashlog="/Users/adrianmiranda/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt"
 flexsdk="/Users/adrianmiranda/addons/SDKs/flex_sdk_4.6.0"
 airsdk="/Users/adrianmiranda/addons/SDKs/air_sdk_3.6.0"
+adt="$airsdk/bin/adt"
 swc="$flexsdk/frameworks/libs/framework.swc $librarypath"
 mxmlc="$flexsdk/bin/mxmlc"
 asdoc="$flexsdk/bin/asdoc"
@@ -134,20 +135,21 @@ if [ "$1" != "help" ] && [ "$1" != "l" ] && [ "$1" != "ll" ] && [ "$1" != "llh" 
 		rm -Rf *.air *.dmg *.ipa
 		
 		# uinstall previous version
-		# 
+		# $adt -uninstallApp -platformsdk $airsdk -appid $appname
 
 		# dependencies
 		directories="$bin/content"
 		
 		# create certificate
-		$airsdk/bin/adt -certificate -cn AM -ou AM -o AM -c BR -validityPeriod 2 1024-RSA certificate.p12 "$appname"
+		$adt -certificate -cn AM -ou AM -o AM -c BR -validityPeriod 2 1024-RSA certificate.p12 "$appname"
 		
 		# compile air
-		$airsdk/bin/adt -version
-		$airsdk/bin/adt -package -storetype pkcs12 -keystore certificate.p12 -storepass "$appname" $air $appname-app.xml $swf $directories
+		$adt -version
+		$adt -package -storetype pkcs12 -keystore certificate.p12 -storepass "$appname" $air $appname-app.xml $swf $directories
 		
-		if [ "$3" = "r" ]; then
-			open $appname.air
+		if [ "$2" = "r" ]; then
+			echo "+> Installing $appname"
+			open $air
 		fi
 	fi
 
