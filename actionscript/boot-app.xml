@@ -2,11 +2,11 @@
 <application xmlns="http://ns.adobe.com/air/application/3.6">
 	<supportedProfiles>desktop extendedDesktop mobileDevice tv extendedTV</supportedProfiles>
 	<id>com.ad.boot</id>
-	<versionNumber>1.49</versionNumber>
-	<versionLabel>1.49</versionLabel>
+	<versionNumber>1.1</versionNumber>
+	<versionLabel>1.1</versionLabel>
 	<filename>boot</filename>
-	<name>Boot</name>
-	<description>Boot - Sample</description>
+	<name>boot</name>
+	<description>boot - Sample</description>
 	<copyright>Adrian Miranda</copyright>
 	<customUpdateUI>false</customUpdateUI>
 	<allowBrowserInvocation>false</allowBrowserInvocation>

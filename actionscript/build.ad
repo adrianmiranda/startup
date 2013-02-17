@@ -120,16 +120,18 @@ if [ "$1" != "help" ] && [ "$1" != "l" ] && [ "$1" != "ll" ] && [ "$1" != "llh" 
 	# run adt
 	# 
 	if [ "$1" = "air" ]; then
-		echo "\n:: Building $swf in $bin \n"
+		echo "\n:: Building $air in $bin \n"
 		
 		# revision
-		version='APP_VERSION'
 		revision=`cat revision`
 		echo "REVISION $revision"
 		echo $((revision+1)) > revision
 		
-		# update xml config
-		sed "s/$version/$revision/g" $appname.xml > $appname-app.xml
+		# update xml config (http://www.grymoire.com/Unix/Sed.html)
+		sed -e "s/APP_REVISION/$revision/g" \
+			-e "s/APP_NAME/$appname/g" $appname.xml > $appname-app.xml
+		# sed "s/APP_FILENAME/$appname/g" $appname-app.xml
+		# sed "s/APP_SWF/$swf/g" $appname.xml > $appname-app.xml
 		
 		# remove previous versions
 		rm -Rf *.air *.dmg *.ipa

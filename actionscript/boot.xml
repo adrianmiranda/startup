@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <application xmlns="http://ns.adobe.com/air/application/3.6">
 	<supportedProfiles>desktop extendedDesktop mobileDevice tv extendedTV</supportedProfiles>
-	<id>com.ad.boot</id>
-	<versionNumber>1.APP_VERSION</versionNumber>
-	<versionLabel>1.APP_VERSION</versionLabel>
-	<filename>boot</filename>
-	<name>Boot</name>
-	<description>Boot - Sample</description>
+	<id>com.ad.APP_NAME</id>
+	<versionNumber>1.APP_REVISION</versionNumber>
+	<versionLabel>1.APP_REVISION</versionLabel>
+	<filename>APP_NAME</filename>
+	<name>APP_NAME</name>
+	<description>APP_NAME - Sample</description>
 	<copyright>Adrian Miranda</copyright>
 	<customUpdateUI>false</customUpdateUI>
 	<allowBrowserInvocation>false</allowBrowserInvocation>
 	<initialWindow>
-		<content>publish/boot.swf</content>
+		<content>publish/APP_NAME.swf</content>
 		<systemChrome>standard</systemChrome>
 		<transparent>false</transparent>
 		<visible>true</visible>
