@@ -66,7 +66,7 @@ adt="$airsdk/bin/adt"
 swc="$flexsdk/frameworks/libs/framework.swc $librarypath"
 mxmlc="$flexsdk/bin/mxmlc"
 asdoc="$flexsdk/bin/asdoc"
-vars='-define CONFIG::LOGGING true -define CONFIG::PLATFORM true -define CONFIG::MOCK false'
+vars="-define CONFIG::LOGGING true -define CONFIG::PLATFORM true -define CONFIG::MOCK false"
 
 ################################################################################
 #
@@ -128,10 +128,10 @@ if [ "$1" != "help" ] && [ "$1" != "l" ] && [ "$1" != "ll" ] && [ "$1" != "llh" 
 		echo $((revision+1)) > revision
 		
 		# update xml config (http://www.grymoire.com/Unix/Sed.html)
+		APP_SWF_TREATED=`echo $swf | sed 's/\./\\\\./g'`
 		sed -e "s/APP_REVISION/$revision/g" \
 			-e "s/APP_NAME/$appname/g" $appname.xml > $appname-app.xml
-		# sed "s/APP_FILENAME/$appname/g" $appname-app.xml
-		# sed "s/APP_SWF/$swf/g" $appname.xml > $appname-app.xml
+			# -e "s/APP_SWF/$APP_SWF_TREATED/g" $appname.xml > $appname-app.xml
 		
 		# remove previous versions
 		rm -Rf *.air *.dmg *.ipa

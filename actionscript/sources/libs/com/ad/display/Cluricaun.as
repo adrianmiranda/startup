@@ -128,6 +128,14 @@ package com.ad.display {
 		
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		
+		public function set radian(value:Number):void {
+			this.rotation = value * 180 / Math.PI;
+		}
+
+		public function get radian():Number {
+			return this.rotation * Math.PI / 180;
+		}
+
 		public function move(x:Number, y:Number):void {
 			this.x = Math.round(x);
 			this.y = Math.round(y);

@@ -3,7 +3,8 @@ package com.ad.data {
 	import com.ad.utils.Binding;
 	import com.ad.utils.BranchUtils;
 	import com.ad.errors.ADError;
-	
+	import com.greensock.loading.LoaderMax;
+
 	import __AS3__.vec.Vector;
 	import flash.display.DisplayObject;
 	import flash.utils.getDefinitionByName;
@@ -17,6 +18,7 @@ package com.ad.data {
 		private static var LIST:Vector.<View> = new Vector.<View>();
 		private static var BRANCH:String = new String();
 		private static var INDEX:uint;
+		private var _loader:LoaderMax;
 		private var _caste:Class;
 		private var _index:uint;
 		private var _branch:String;
@@ -123,7 +125,7 @@ package com.ad.data {
 			var fileList:Vector.<File> = new Vector.<File>();
 			for each (var child:XML in list.file) {
 				var file:File = new File(child, this._binding);
-				file.parent = parent;
+				file.nsarmored::parent = parent;
 				fileList.push(file);
 			}
 			return fileList;

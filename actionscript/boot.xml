@@ -11,7 +11,7 @@
 	<customUpdateUI>false</customUpdateUI>
 	<allowBrowserInvocation>false</allowBrowserInvocation>
 	<initialWindow>
-		<content>publish/APP_NAME.swf</content>
+		<content>APP_SWF</content>
 		<systemChrome>standard</systemChrome>
 		<transparent>false</transparent>
 		<visible>true</visible>

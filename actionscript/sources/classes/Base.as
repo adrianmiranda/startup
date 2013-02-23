@@ -13,7 +13,7 @@ package {
 	/**
 	 * @author Adrian C. Miranda <ad@adrianmiranda.com.br>
 	 */
-	public final class Base extends SpriteBase {
+	public final class Base extends SectionLite {
 		public var background:Background;
 		public var header:Header;
 		public var footer:Footer;
@@ -29,6 +29,16 @@ package {
 
 		override protected function finalize():void {
 			
+		}
+		
+		override public function transitionIn():void {
+			super.transitionIn();
+			super.transitionInComplete();	
+		}
+
+		override public function transitionOut():void {
+			super.transitionOut();
+			super.transitionOutComplete();	
 		}
 
 		override public function arrange():void {

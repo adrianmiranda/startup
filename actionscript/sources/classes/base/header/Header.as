@@ -22,6 +22,14 @@ package base.header {
 			
 		}
 
+		public function transitionIn():void {
+			
+		}
+
+		public function transitionOut():void {
+			
+		}
+
 		public function arrange():void {
 
 		}

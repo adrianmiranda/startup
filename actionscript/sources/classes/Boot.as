@@ -33,7 +33,7 @@ package {
 		}
 
 		override protected function initialize():void {
-			_cmmenu = new ContextMenuManager(this);
+			_cmmenu = new ContextMenuManager(this, true);
 			_app = Application.getInstance();
 			_app.plugins(AutoAlphaPlugin);
 			_app.loaders(XMLLoader, SWFLoader);
@@ -73,19 +73,16 @@ package {
 			_cmmenu.add('about', onClickAbout, true);
 			_cmmenu.add('contact', onClickContact);
 		}
-
-		private function onClickByline(event:ContextMenuEvent):void
-		{
+		
+		private function onClickByline(event:ContextMenuEvent):void {
 			Browser.gotoURL('https://github.com/adrianmiranda', '_blank');
 		}
 
-		private function onClickAbout(event:ContextMenuEvent):void
-		{
+		private function onClickAbout(event:ContextMenuEvent):void {
 			Browser.gotoURL('http://cargocollective.com/adrianmiranda', '_blank');
 		}
 
-		private function onClickContact(event:ContextMenuEvent):void
-		{
+		private function onClickContact(event:ContextMenuEvent):void {
 			Browser.mailTo('adriancmiranda@gmail.com', 'ad::feedback');
 		}
 	}
