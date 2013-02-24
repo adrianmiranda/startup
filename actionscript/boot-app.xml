@@ -2,8 +2,8 @@
 <application xmlns="http://ns.adobe.com/air/application/3.6">
 	<supportedProfiles>desktop extendedDesktop mobileDevice tv extendedTV</supportedProfiles>
 	<id>boot</id>
-	<versionNumber>1.55</versionNumber>
-	<versionLabel>1.55</versionLabel>
+	<versionNumber>1.60</versionNumber>
+	<versionLabel>1.60</versionLabel>
 	<filename>boot</filename>
 	<name>boot</name>
 	<description>boot - Sample</description>

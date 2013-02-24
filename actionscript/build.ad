@@ -210,5 +210,5 @@ elif [ "$1" = "help" ] || [ "$1" = "h" ]; then # help user
 	echo "   rlh\tRun localhost"
 	echo "   ssr\tSearch strings recursively in files"
 	echo "   air\tGenerate Air file"
-	echo "-"
+	echo "See 'sh build.ad <command>' for more information on a specific command."
 fi
