@@ -66,7 +66,7 @@ adt="$airsdk/bin/adt"
 swc="$flexsdk/frameworks/libs/framework.swc $librarypath"
 mxmlc="$flexsdk/bin/mxmlc"
 asdoc="$flexsdk/bin/asdoc"
-vars="-define CONFIG::LOGGING true -define CONFIG::PLATFORM true -define CONFIG::MOCK false -define CONFIG::WEB false"
+vars="-define CONFIG::LOGGING true -define CONFIG::PLATFORM true -define CONFIG::MOCK false"
 
 ################################################################################
 #
@@ -96,6 +96,12 @@ if float_condition ''$targetplayer' > 10.1'; then
 	vars="-target-player=$targetplayer $vars -define CONFIG::FLASH_10_1 false"
 else
 	vars="-target-player=$targetplayer $vars -define CONFIG::FLASH_10_1 true"
+fi
+
+if [ "$1" = "air" ]; then
+	vars="$vars -define CONFIG::AIR true -define CONFIG::WEB false"
+else
+	vars="$vars -define CONFIG::AIR false -define CONFIG::WEB true"
 fi
 
 #
