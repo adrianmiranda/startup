@@ -66,7 +66,7 @@ adt="$airsdk/bin/adt"
 swc="$flexsdk/frameworks/libs/framework.swc $librarypath"
 mxmlc="$flexsdk/bin/mxmlc"
 asdoc="$flexsdk/bin/asdoc"
-vars="-define CONFIG::LOGGING true -define CONFIG::PLATFORM true -define CONFIG::MOCK false"
+vars="-define CONFIG::LOGGING true -define CONFIG::PLATFORM true -define CONFIG::MOCK false -define CONFIG::WEB false"
 
 ################################################################################
 #
@@ -138,12 +138,12 @@ if [ "$1" != "help" ] && [ "$1" != "l" ] && [ "$1" != "ll" ] && [ "$1" != "llh" 
 		
 		# uinstall previous version
 		# $adt -uninstallApp -platformsdk $airsdk -appid $appname
-
-		# dependencies
-		directories="$bin/content"
 		
 		# create certificate
 		$adt -certificate -cn AM -ou AM -o AM -c BR -validityPeriod 2 1024-RSA certificate.p12 "$appname"
+
+		# dependencies
+		directories="$bin/content"
 		
 		# compile air
 		$adt -version

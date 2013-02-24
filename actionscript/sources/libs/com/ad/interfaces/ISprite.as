@@ -46,8 +46,11 @@ package com.ad.interfaces {
 		function swapChildren(child1:DisplayObject, child2:DisplayObject):void;
 		function swapChildrenAt(index1:int, index2:int):void;
 		// PROXY INTERACTIVE OBJECT PROPERTIES
-		function get contextMenu():ContextMenu;
-		function set contextMenu(value:ContextMenu):void;
+		CONFIG::WEB
+		{
+			function get contextMenu():ContextMenu;
+			function set contextMenu(value:ContextMenu):void;
+		}
 		function get doubleClickEnabled():Boolean;
 		function set doubleClickEnabled(value:Boolean):void;
 		function get focusRect():Object;
