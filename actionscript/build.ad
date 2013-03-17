@@ -116,7 +116,7 @@ fi
 #
 # run mxmlc
 #
-if [ "$1" != "help" ] && [ "$1" != "l" ] && [ "$1" != "ll" ] && [ "$1" != "llh" ]; then
+if [ "$1" != "help" ] && [ "$1" != "bytes" ] && [ "$1" != "l" ] && [ "$1" != "ll" ] && [ "$1" != "llh" ]; then
 	echo ":: Building $swf in $bin \n"
 	startTime=`eval date +%s`
 	$mxmlc $as -o $swf -source-path $sourcespath -library-path $swc $options
@@ -198,6 +198,15 @@ elif [ "$1" = "rlh" ] || [ "$1" = "llh" ]; then # run localhost
 	echo "      [ Press ctrl+c to get out ] \n"
 	python -m SimpleHTTPServer
 	echo " << traffic successfully CANCELED"
+elif [ "$1" = "bytes" ]; then # run localhost
+	echo "bytes\tfile"
+	if [ "$2" ]; then
+		cd "$2"
+	else
+		cd "$bin"
+	fi
+	du -a
+	echo "--"
 elif [ "$1" = "help" ] || [ "$1" = "h" ]; then # help user
 	echo "usage:  sh build.ad [l][ll][llh][r][rl][rlh][ssr[=<string>][=<path>]][help]"
 	echo "\tsh build.ad <command> [<args>]"
